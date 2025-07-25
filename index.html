@@ -222,6 +222,8 @@
             width: auto;
             animation: pulse 3s infinite ease-in-out;
             filter: drop-shadow(0 0 10px rgba(230, 126, 34, 0.3));
+            background-color: transparent; /* Tambahkan ini untuk memastikan background transparan */
+            mix-blend-mode: multiply; /* Ini akan membantu menghilangkan background putih */
         }
         
         @keyframes pulse {
@@ -240,190 +242,21 @@
             }
         }
         
-        .tagline {
-            font-size: 2rem;
-            max-width: 800px;
-            margin: 0 auto 3rem;
-            font-weight: 300;
-            line-height: 1.4;
-            letter-spacing: 0.5px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 0.3s forwards;
-            font-family: 'Playfair Display', serif;
-            position: relative;
-        }
-        
-        .tagline::before, .tagline::after {
-            content: '❝';
-            position: absolute;
-            font-size: 3rem;
-            color: var(--gold);
-            opacity: 0.5;
-        }
-        
-        .tagline::before {
-            top: -30px;
-            left: -30px;
-        }
-        
-        .tagline::after {
-            bottom: -40px;
-            right: -30px;
-            transform: rotate(180deg);
-        }
-        
-        /* Search Bar in Header */
-        .header-search {
-            max-width: 600px;
-            margin: 0 auto 3rem;
-            position: relative;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 0.5s forwards;
-        }
-        
-        .header-search input {
-            width: 100%;
-            padding: 1.2rem 2rem;
-            border-radius: 50px;
-            border: none;
-            font-size: 1.1rem;
-            box-shadow: var(--shadow-lg);
-            transition: var(--transition);
-            padding-right: 4.5rem;
-            background: rgba(255, 255, 255, 0.9);
-        }
-        
-        .header-search input:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.3), var(--shadow-xl);
-        }
-        
-        .header-search button {
-            position: absolute;
-            right: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            background: var(--accent);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: var(--shadow-sm);
-        }
-        
-        .header-search button:hover {
-            background: #d9731f;
-            transform: translateY(-50%) scale(1.05);
-            box-shadow: var(--shadow-md);
-        }
-        
-        .header-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            margin-top: 1.5rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 0.6s forwards;
-        }
-        
-        .scroll-down {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
-            font-size: 2.5rem;
-            animation: bounce 2s infinite;
-            cursor: pointer;
-            z-index: 2;
-            opacity: 0.7;
-            transition: var(--transition);
-        }
-        
-        .scroll-down:hover {
-            opacity: 1;
-            transform: translateY(5px) translateX(-50%);
-            color: var(--gold);
-        }
-        
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
-            40% { transform: translateY(-15px) translateX(-50%); }
-            60% { transform: translateY(-7px) translateX(-50%); }
-        }
-        
-        @keyframes fadeInUp {
-            from { 
-                opacity: 0; 
-                transform: translateY(20px);
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0);
-            }
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-        
-        /* Navigation */
-        nav {
-            background-color: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(8px);
-            transition: var(--transition);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        
-        nav.scrolled {
-            background-color: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.15);
-            padding: 0.5rem 0;
-        }
-        
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.2rem 1.5rem;
-            transition: var(--transition);
-        }
-        
-        nav.scrolled .nav-container {
-            padding: 0.8rem 1.5rem;
-        }
-        
-        .nav-logo {
-            font-weight: 600;
-            color: var(--primary);
-            text-decoration: none;
-            font-size: 1.4rem;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-family: 'Playfair Display', serif;
-            letter-spacing: 0.5px;
-        }
-        
+        /* Nav Logo */
         .nav-logo img {
             height: 40px;
             width: auto;
             transition: var(--transition);
+            background-color: transparent; /* Pastikan background transparan */
+            mix-blend-mode: multiply; /* Untuk menghilangkan background putih */
+        }
+        
+        /* Footer Logo */
+        .footer-logo img {
+            height: 50px;
+            width: auto;
+            filter: brightness(0) invert(1);
+            background-color: transparent; /* Pastikan background transparan */
         }
         
         /* Nav Search */
@@ -2460,12 +2293,12 @@
     <!-- Partikel Animasi -->
     <div class="particles" id="particles"></div>
     
-    <!-- Header Modern -->
+   <!-- Header Modern -->
     <header id="home">
         <div class="header-overlay"></div>
         <div class="header-content">
             <div class="logo">
-                <img src="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/LOGO-ANEKAMARKET.png" alt="ANEKAMARKET Logo">
+                <img src="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/LOGO-ANEKAMARKET.png" alt="ANEKAMARKET Logo" style="background-color: transparent;">
                 <span>ANEKAMARKET</span>
             </div>
             <p class="tagline">Semua Bisa Jualan & Semua Bisa Pesan</p>
@@ -2490,15 +2323,7 @@
         </div>
     </header>
     
-    <!-- Navigation -->
-    <nav id="navbar">
-        <div class="nav-container">
-            <a href="#" class="nav-logo">
-                <img src="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/LOGO-ANEKAMARKET.png" alt="ANEKAMARKET Logo">
-                <span>ANEKAMARKET</span>
-            </a>
-            
-            <!-- Nav Search (Hidden on mobile) -->
+      <!-- Nav Search (Hidden on mobile) -->
             <div class="nav-search" id="navSearch">
                 <input type="text" placeholder="Cari produk atau layanan...">
                 <button><i class="fas fa-search"></i></button>
@@ -2857,11 +2682,12 @@
     </div>
     
     <!-- UPDATED FOOTER - MORE PROFESSIONAL AND PREMIUM -->
+    <!-- UPDATED FOOTER - MORE PROFESSIONAL AND PREMIUM -->
     <footer>
         <div class="footer-container">
             <div class="footer-col footer-about">
                 <div class="footer-logo">
-                    <img src="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/LOGO-ANEKAMARKET.png" alt="ANEKAMARKET Logo">
+                    <img src="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/LOGO-ANEKAMARKET.png" alt="ANEKAMARKET Logo" style="background-color: transparent;">
                     <span>ANEKAMARKET</span>
                 </div>
                 <p>Menyediakan produk kerajinan tangan berkualitas tinggi, jasa sewa, dan solusi promosi sejak tahun 2025. Komitmen kami adalah memberikan pengalaman berbelanja online yang menyenangkan dan memuaskan.</p>
