@@ -57,7 +57,7 @@
             color: var(--dark);
         }
         
-        /* Loading Screen */
+        /* === Improved Loading Screen === */
         .loading-screen {
             position: fixed;
             top: 0;
@@ -66,10 +66,12 @@
             height: 100%;
             background: var(--dark);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             z-index: 9999;
-            transition: opacity 0.8s ease, visibility 0.8s;
+            transition: opacity 1s ease, visibility 1s;
+            font-family: 'Playfair Display', serif;
         }
 
         .loading-screen.hidden {
@@ -78,34 +80,34 @@
             pointer-events: none;
         }
 
-        .loading-dots {
-            display: flex;
-            gap: 15px;
+        .loading-logo-container {
+            text-align: center;
+            animation: fadeInLoading 1.5s ease-out;
         }
 
-        .loading-dots .dot {
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            background-color: white;
-            animation: bounce 1.4s infinite ease-in-out both;
+        .loading-logo-container img {
+            width: 130px;
+            height: auto;
+            margin-bottom: 1.5rem;
+            animation: logoPulse 2.5s infinite ease-in-out;
         }
 
-        .loading-dots .dot:nth-child(1) {
-            animation-delay: -0.32s;
+        .loading-logo-container span {
+            color: white;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            opacity: 0.8;
         }
 
-        .loading-dots .dot:nth-child(2) {
-            animation-delay: -0.16s;
+        @keyframes fadeInLoading {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
 
-        @keyframes bounce {
-            0%, 80%, 100% {
-                transform: scale(0);
-            }
-            40% {
-                transform: scale(1.0);
-            }
+        @keyframes logoPulse {
+            0% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(230, 126, 34, 0.4)); }
+            50% { transform: scale(1.05); filter: drop-shadow(0 0 20px rgba(230, 126, 34, 0.8)); }
+            100% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(230, 126, 34, 0.4)); }
         }
         
         /* Premium Particle Animation */
@@ -207,6 +209,7 @@
             }
         }
         
+        /* === Improved Header Logo === */
         .logo {
             font-size: 4.5rem;
             font-weight: 700;
@@ -215,10 +218,11 @@
             align-items: center;
             justify-content: center;
             gap: 20px;
-            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); /* Softer shadow */
             font-family: 'Playfair Display', serif;
             letter-spacing: 1px;
             position: relative;
+            cursor: default; /* Not a clickable element */
         }
         
         .logo::after {
@@ -236,24 +240,13 @@
         .logo img {
             height: 120px;
             width: auto;
-            animation: pulse 3s infinite ease-in-out;
-            filter: drop-shadow(0 0 10px rgba(230, 126, 34, 0.3));
+            /* Removed distracting pulse animation */
+            filter: drop-shadow(0 0 15px rgba(230, 126, 34, 0.4));
+            transition: transform 0.4s ease; /* Added transition for hover */
         }
-        
-        @keyframes pulse {
-            0% { 
-                transform: scale(1); 
-                opacity: 0.9;
-            }
-            50% { 
-                transform: scale(1.1); 
-                opacity: 1;
-                filter: drop-shadow(0 0 20px rgba(230, 126, 34, 0.7));
-            }
-            100% { 
-                transform: scale(1); 
-                opacity: 0.9;
-            }
+
+        .logo:hover img {
+            transform: scale(1.05); /* Subtle zoom on hover */
         }
         
         .tagline {
@@ -356,7 +349,7 @@
             transform: translateX(-50%);
             color: white;
             font-size: 2.5rem;
-            animation: bounce 2s infinite;
+            animation: bounceScroll 2s infinite;
             cursor: pointer;
             z-index: 2;
             opacity: 0.7;
@@ -369,7 +362,7 @@
             color: var(--gold);
         }
         
-        @keyframes bounce {
+        @keyframes bounceScroll {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
             40% { transform: translateY(-15px) translateX(-50%); }
             60% { transform: translateY(-7px) translateX(-50%); }
@@ -729,7 +722,7 @@
             border: 1px solid rgba(0, 0, 0, 0.03);
         }
         
-        @keyframes fadeInUp {
+        @keyframes fadeInUpGallery {
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -1649,6 +1642,7 @@
             overflow: hidden;
         }
         
+        /* === Improved Footer Background === */
         footer::before {
             content: '';
             position: absolute;
@@ -1656,10 +1650,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png') center/cover fixed;
-            background-size: 20%;
-            background-repeat: no-repeat;
-            opacity: 0.03;
+            background-image: url('https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png');
+            background-size: 150px; /* Smaller, fixed size for pattern */
+            background-repeat: repeat; /* Tiled pattern */
+            opacity: 0.02; /* Make it more subtle */
             z-index: 0;
         }
         
@@ -2464,8 +2458,10 @@
 </head>
 <body>
     <div class="loading-screen">
-        <div class="loading-spinner"></div>
-        <h2 style="color: white; font-family: 'Playfair Display', serif; margin-top: 1.5rem;">Anekamarket</h2>
+        <div class="loading-logo-container">
+            <img src="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png" alt="Anekamarket Loading Logo">
+            <span>Memuat Anekamarket...</span>
+        </div>
     </div>
     
     <audio id="bgMusic" loop autoplay>
@@ -3034,7 +3030,7 @@
                 
                 if (scrollPosition > itemPosition + 100) {
                     item.style.animationDelay = `${index * 0.1}s`;
-                    item.style.animationName = 'fadeInUp';
+                    item.style.animationName = 'fadeInUpGallery';
                 }
             });
         }
@@ -3480,7 +3476,7 @@
                 galleryItems.forEach(item => {
                     if (type === 'all' || item.dataset.type === type) {
                         item.style.display = 'block';
-                        item.style.animation = 'fadeInUp 0.6s forwards';
+                        item.style.animation = 'fadeInUpGallery 0.6s forwards';
                     } else {
                         item.style.display = 'none';
                     }
@@ -3505,7 +3501,7 @@
                 galleryItems.forEach(item => {
                     if (category === 'all' || item.dataset.category === category) {
                         item.style.display = 'block';
-                        item.style.animation = 'fadeInUp 0.6s forwards';
+                        item.style.animation = 'fadeInUpGallery 0.6s forwards';
                     } else {
                         item.style.display = 'none';
                     }
