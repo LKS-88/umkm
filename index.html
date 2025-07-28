@@ -66,7 +66,7 @@
             height: 100%;
             background: var(--dark);
             display: flex;
-            flex-direction: column; /* Mengatur item secara vertikal */
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             z-index: 9999;
@@ -80,16 +80,16 @@
         }
 
         .loading-logo {
-            width: 120px; /* Ukuran logo yang pas */
+            width: 120px;
             height: auto;
-            margin-bottom: 20px; /* Jarak antara logo dan teks */
+            margin-bottom: 20px;
             animation: subtle-pulse 2s infinite ease-in-out;
         }
 
         .loading-screen h2 {
             color: white;
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem; /* Ukuran teks yang sesuai */
+            font-size: 1.5rem;
             opacity: 0.8;
         }
 
@@ -157,21 +157,6 @@
             margin: 0 auto;
             padding: 2rem 1.5rem;
             animation: fadeIn 1.2s ease-out;
-            perspective: 1000px;
-            transform-style: preserve-3d;
-        }
-        
-        .header-content::before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            left: -50px;
-            right: -50px;
-            bottom: -50px;
-            background: radial-gradient(circle at center, rgba(212, 175, 55, 0.1), transparent 70%);
-            z-index: -1;
-            border-radius: 20px;
-            transform: translateZ(-50px);
         }
         
         @keyframes fadeIn {
@@ -207,16 +192,15 @@
         }
         
         .logo img {
-            height: 120px; /* Ukuran logo di header */
+            height: 120px;
             width: auto;
             filter: drop-shadow(0 0 10px rgba(230, 126, 34, 0.3));
             transition: transform 0.3s ease;
-            /* Menghapus animasi pulse yang bermasalah */
-            animation: none; 
+            animation: none; /* Memastikan tidak ada animasi otomatis */
         }
         
         .logo:hover img {
-            transform: scale(1.05); /* Efek hover yang lebih halus */
+            transform: scale(1.05);
         }
         
         .tagline {
@@ -1105,7 +1089,7 @@
         
         /* === PERBAIKAN FOOTER === */
         footer {
-            background: linear-gradient(135deg, var(--primary), var(--dark)); /* Latar belakang gradient yang bersih */
+            background: linear-gradient(135deg, var(--primary), var(--dark));
             color: white;
             padding: 6rem 0 0;
             position: relative;
@@ -1113,9 +1097,8 @@
         }
         
         footer::before {
-            /* Menghapus background image yang bermasalah */
             content: '';
-            background: none;
+            background: none; /* Menghapus background image yang bermasalah */
         }
         
         .footer-container {
@@ -1194,10 +1177,8 @@
 </head>
 <body>
     <div class="loading-screen">
-        <div class="loading-logo-container">
-            <img class="loading-logo" src="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png" alt="Anekamarket Loading Logo">
-            <h2>Anekamarket</h2>
-        </div>
+        <img class="loading-logo" src="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png" alt="Anekamarket Loading Logo">
+        <h2>Anekamarket</h2>
     </div>
     
     <audio id="bgMusic" loop autoplay>
@@ -1617,6 +1598,7 @@
         // Particles Initialization
         function initParticles() {
             const particlesContainer = document.getElementById('particles');
+            if(!particlesContainer) return;
             const particleCount = 40;
             
             for (let i = 0; i < particleCount; i++) {
@@ -1638,6 +1620,7 @@
         // Navbar Scroll Effect
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
+            if(!navbar) return;
             if (window.scrollY > 50) {
                 navbar.classList.add('scrolled');
             } else {
@@ -1687,6 +1670,7 @@
             button.addEventListener('click', function() {
                 const targetId = this.getAttribute('data-target');
                 const expandedContent = document.getElementById(targetId);
+                if(!expandedContent) return;
                 expandedContent.classList.toggle('active');
                 
                 if (expandedContent.classList.contains('active')) {
@@ -1706,6 +1690,7 @@
             thumbnail.addEventListener('click', function() {
                 const mainImageId = this.dataset.mainImage;
                 const mainImage = document.getElementById(mainImageId);
+                if(!mainImage) return;
                 mainImage.src = this.src;
                 
                 this.parentElement.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
@@ -1717,15 +1702,16 @@
         // Image Zoom Modal
         const imageModal = document.getElementById('imageModal');
         const zoomedImage = document.getElementById('zoomedImage');
-        document.querySelectorAll('.gallery-main-image').forEach(img => {
-            img.addEventListener('click', function() {
-                zoomedImage.src = this.src;
-                imageModal.classList.add('show');
+        if(imageModal && zoomedImage){
+            document.querySelectorAll('.gallery-main-image').forEach(img => {
+                img.addEventListener('click', function() {
+                    zoomedImage.src = this.src;
+                    imageModal.classList.add('show');
+                });
             });
-        });
-        document.querySelector('.close-image-modal').addEventListener('click', () => imageModal.classList.remove('show'));
-        
-        // Price & Quantity Logic
+            document.querySelector('.close-image-modal').addEventListener('click', () => imageModal.classList.remove('show'));
+        }
+
         function updateTotalPrice(detailsContainer) {
             const activeVariation = detailsContainer.querySelector('.price-variation.active');
             const quantityInput = detailsContainer.querySelector('.quantity-input');
@@ -1736,7 +1722,8 @@
             const totalPrice = price * quantity;
             
             const formattedPrice = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(totalPrice);
-            detailsContainer.querySelector('.total-price-value').textContent = formattedPrice;
+            const totalPriceValueEl = detailsContainer.querySelector('.total-price-value');
+            if(totalPriceValueEl) totalPriceValueEl.textContent = formattedPrice;
         }
 
         document.querySelectorAll('.gallery-details').forEach(container => {
@@ -1750,25 +1737,30 @@
             });
 
             const quantityInput = container.querySelector('.quantity-input');
-            container.querySelector('.quantity-btn.plus').addEventListener('click', () => {
-                quantityInput.value = parseInt(quantityInput.value) + 1;
-                updateTotalPrice(container);
-                playButtonSound();
-            });
-            container.querySelector('.quantity-btn.minus').addEventListener('click', () => {
-                if(quantityInput.value > 1) {
-                    quantityInput.value = parseInt(quantityInput.value) - 1;
+            if(quantityInput) {
+                const plusBtn = container.querySelector('.quantity-btn.plus');
+                const minusBtn = container.querySelector('.quantity-btn.minus');
+
+                if(plusBtn) plusBtn.addEventListener('click', () => {
+                    quantityInput.value = parseInt(quantityInput.value) + 1;
                     updateTotalPrice(container);
                     playButtonSound();
-                }
-            });
-            quantityInput.addEventListener('change', () => updateTotalPrice(container));
+                });
+                if(minusBtn) minusBtn.addEventListener('click', () => {
+                    if(quantityInput.value > 1) {
+                        quantityInput.value = parseInt(quantityInput.value) - 1;
+                        updateTotalPrice(container);
+                        playButtonSound();
+                    }
+                });
+                quantityInput.addEventListener('change', () => updateTotalPrice(container));
+            }
         });
 
-        // Pre-order Form Toggle
         document.querySelectorAll('.btn-preorder-toggle').forEach(button => {
             button.addEventListener('click', function() {
                 const preorderForm = this.closest('.gallery-details').querySelector('.preorder-form');
+                if(!preorderForm) return;
                 preorderForm.classList.toggle('active');
                 this.classList.toggle('active');
                 this.innerHTML = this.classList.contains('active') ? '<i class="fas fa-times"></i> Batal Pre-Order' : '<i class="fas fa-calendar-check"></i> Pre-Order';
@@ -1776,18 +1768,24 @@
             });
         });
         
-        // General Order & Pre-Order Button Logic
         function getWhatsAppMessage(detailsContainer, type = 'order') {
-            const productTitle = detailsContainer.querySelector('.gallery-title').textContent.trim();
-            const productCode = detailsContainer.querySelector('.gallery-code').textContent.trim();
-            const quantity = detailsContainer.querySelector('.quantity-input').value;
-            const unit = detailsContainer.querySelector('.unit-select').value;
-            const totalPrice = detailsContainer.querySelector('.total-price-value').textContent.trim();
-            let sellerWA = '6285647709114'; // Default Admin WA
+            const productTitleEl = detailsContainer.querySelector('.gallery-title');
+            const productCodeEl = detailsContainer.querySelector('.gallery-code');
+            const quantityInput = detailsContainer.querySelector('.quantity-input');
+            const unitSelect = detailsContainer.querySelector('.unit-select');
+            const totalPriceEl = detailsContainer.querySelector('.total-price-value');
+
+            if(!productTitleEl || !productCodeEl || !quantityInput || !unitSelect || !totalPriceEl) return null;
+
+            const productTitle = productTitleEl.textContent.trim();
+            const productCode = productCodeEl.textContent.trim();
+            const quantity = quantityInput.value;
+            const unit = unitSelect.value;
+            const totalPrice = totalPriceEl.textContent.trim();
             
             if (type === 'preorder') {
                 const dpInput = detailsContainer.querySelector('.preorder-input');
-                if (!dpInput.value || dpInput.value <= 0) {
+                if (!dpInput || !dpInput.value || dpInput.value <= 0) {
                     alert('Mohon masukkan nominal DP yang valid.');
                     return null;
                 }
@@ -1816,16 +1814,15 @@
             });
         });
         
-        // Modal Logic
         const quickOrderBtn = document.getElementById('quick-order');
         const orderModal = document.getElementById('orderModal');
-        const closeModalBtn = orderModal.querySelector('.close-modal');
+        if(quickOrderBtn && orderModal){
+            const closeModalBtn = orderModal.querySelector('.close-modal');
+            quickOrderBtn.addEventListener('click', () => { orderModal.classList.add('show'); playButtonSound(); });
+            closeModalBtn.addEventListener('click', () => orderModal.classList.remove('show'));
+            window.addEventListener('click', e => { if (e.target === orderModal) orderModal.classList.remove('show'); });
+        }
         
-        quickOrderBtn.addEventListener('click', () => { orderModal.classList.add('show'); playButtonSound(); });
-        closeModalBtn.addEventListener('click', () => orderModal.classList.remove('show'));
-        window.addEventListener('click', e => { if (e.target === orderModal) orderModal.classList.remove('show'); });
-        
-        // Category Filtering
         function filterItems(attribute, value) {
             document.querySelectorAll('.gallery-item').forEach(item => {
                 item.style.display = (value === 'all' || item.dataset[attribute] === value) ? 'block' : 'none';
@@ -1848,22 +1845,23 @@
             });
         });
 
-        // Sound Function
         function playButtonSound() {
             const sound = document.getElementById('buttonSound');
-            sound.currentTime = 0;
-            sound.play().catch(e => {}); // Ignore play errors
+            if(sound){
+                sound.currentTime = 0;
+                sound.play().catch(e => {});
+            }
         }
         
-        // Smooth Scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 if (this.getAttribute('href') !== '#') {
                     e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
+                    const targetId = this.getAttribute('href');
+                    const target = document.querySelector(targetId);
                     if (target) {
                         window.scrollTo({
-                            top: target.offsetTop - 80, // Adjust for sticky nav
+                            top: target.offsetTop - 80,
                             behavior: 'smooth'
                         });
                     }
@@ -1871,11 +1869,14 @@
             });
         });
 
-        // Form Submission Logic (Contact & Newsletter)
-        document.getElementById('contactForm').addEventListener('submit', function(e) { e.preventDefault(); alert("Form submitted!"); /* Placeholder */ });
-        document.querySelector('.newsletter-form').addEventListener('submit', function(e) { e.preventDefault(); alert("Subscribed!"); /* Placeholder */ });
-        document.getElementById('quickOrderForm').addEventListener('submit', function(e) { e.preventDefault(); alert("Quick order sent!"); /* Placeholder */ });
+        const contactForm = document.getElementById('contactForm');
+        if(contactForm) contactForm.addEventListener('submit', function(e) { e.preventDefault(); alert("Form submitted!"); /* Placeholder */ });
+        
+        const newsletterForm = document.querySelector('.newsletter-form');
+        if(newsletterForm) newsletterForm.addEventListener('submit', function(e) { e.preventDefault(); alert("Subscribed!"); /* Placeholder */ });
 
+        const quickOrderForm = document.getElementById('quickOrderForm');
+        if(quickOrderForm) quickOrderForm.addEventListener('submit', function(e) { e.preventDefault(); alert("Quick order sent!"); /* Placeholder */ });
     </script>
 </body>
 </html>
