@@ -80,47 +80,49 @@
             pointer-events: none;
         }
 
-        .loading-logo {
+        .loading-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .loading-logo-container {
+            position: relative;
             width: 180px;
             height: 180px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loading-logo {
+            width: 100%;
+            height: 100%;
             object-fit: contain;
-            margin-bottom: 25px;
             animation: logoPulse 2s infinite ease-in-out, float 3s infinite ease-in-out;
             filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.7));
             border-radius: 50%;
-            background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(212, 175, 55, 0.1));
-            padding: 15px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(212,175,55,0.1));
             border: 3px solid var(--gold);
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4),
-                        inset 0 0 20px rgba(212, 175, 55, 0.2);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
             position: relative;
-            overflow: hidden;
+            z-index: 2;
         }
 
-        .loading-logo::before {
-            content: '';
+        .loading-logo-glow {
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                to bottom right,
-                transparent,
-                transparent,
-                transparent,
-                rgba(255, 255, 255, 0.1),
-                transparent,
-                transparent,
-                transparent
-            );
-            transform: rotate(30deg);
-            animation: shine 3s infinite;
-        }
-
-        @keyframes shine {
-            0% { transform: translateX(-100%) rotate(30deg); }
-            100% { transform: translateX(100%) rotate(30deg); }
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212,175,55,0.4), rgba(212,175,55,0));
+            animation: pulseGlow 3s infinite alternate;
+            z-index: 1;
         }
 
         .loading-screen h2 {
@@ -142,13 +144,12 @@
         .loading-progress {
             width: 250px;
             height: 8px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 10px;
             margin-top: 30px;
             overflow: hidden;
             position: relative;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2),
-                        inset 0 1px 1px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
         .loading-progress-bar {
@@ -160,12 +161,16 @@
             background: linear-gradient(90deg, var(--gold), var(--accent));
             animation: loadingProgress 2s ease-in-out forwards;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
         }
 
         @keyframes logoPulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.05); }
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(0.9); opacity: 0.6; }
+            100% { transform: scale(1.3); opacity: 0; }
         }
 
         @keyframes float {
@@ -174,9 +179,8 @@
         }
 
         @keyframes loadingProgress {
-            0% { width: 0; opacity: 0; }
-            20% { opacity: 1; }
-            100% { width: 100%; opacity: 1; }
+            0% { width: 0; }
+            100% { width: 100%; }
         }
 
         @keyframes fadeIn {
@@ -251,78 +255,66 @@
         
         /* === IMPROVED HEADER LOGO === */
         .logo {
-            font-size: 4.5rem;
-            font-weight: 700;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .logo-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin-bottom: 25px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 25px;
-            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(212,175,55,0.1));
+            border: 3px solid var(--gold);
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.5);
+            transition: all 0.5s ease;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo-glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212,175,55,0.4), rgba(212,175,55,0));
+            animation: logoGlow 3s infinite alternate;
+            z-index: 1;
+        }
+        
+        .logo-text {
+            font-size: 4.5rem;
+            font-weight: 700;
             font-family: 'Playfair Display', serif;
             letter-spacing: 1px;
-            position: relative;
-            flex-direction: column;
-        }
-        
-        .logo img {
-            height: 180px;
-            width: 180px;
-            object-fit: contain;
-            filter: drop-shadow(0 0 20px rgba(230, 126, 34, 0.6));
-            transition: all 0.5s ease;
-            border-radius: 50%;
-            background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(212, 175, 55, 0.1));
-            padding: 15px;
-            border: 3px solid var(--gold);
-            animation: logoGlow 3s infinite alternate;
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4),
-                        inset 0 0 20px rgba(212, 175, 55, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .logo img::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                to bottom right,
-                transparent,
-                transparent,
-                transparent,
-                rgba(255, 255, 255, 0.1),
-                transparent,
-                transparent,
-                transparent
-            );
-            transform: rotate(30deg);
-            animation: shine 3s infinite;
-        }
-
-        @keyframes logoGlow {
-            0% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.5), 
-                            inset 0 0 10px rgba(212, 175, 55, 0.2); }
-            100% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.8),
-                            inset 0 0 15px rgba(212, 175, 55, 0.3); }
-        }
-        
-        .logo span {
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             background: linear-gradient(to right, var(--gold), var(--gold-light));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             position: relative;
-            margin-top: 20px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            margin-top: 15px;
         }
         
         .logo::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
             width: 150px;
@@ -332,9 +324,14 @@
             box-shadow: 0 2px 10px rgba(212, 175, 55, 0.5);
         }
         
-        .logo:hover img {
-            transform: scale(1.08) rotate(5deg);
+        .logo:hover .logo-img {
+            transform: scale(1.05) rotate(5deg);
             filter: drop-shadow(0 0 25px rgba(230, 126, 34, 0.8));
+        }
+        
+        @keyframes logoGlow {
+            0% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.5), 0 0 40px rgba(212, 175, 55, 0.3); }
+            100% { box-shadow: 0 0 30px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.4); }
         }
         
         .tagline {
@@ -501,16 +498,34 @@
             letter-spacing: 0.5px;
         }
         
-        .nav-logo img {
-            height: 50px;
+        .nav-logo-container {
+            position: relative;
             width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .nav-logo-img {
+            height: 100%;
+            width: 100%;
             object-fit: contain;
             transition: var(--transition);
             border-radius: 50%;
             padding: 5px;
-            background: linear-gradient(45deg, rgba(66, 153, 225, 0.1), rgba(212, 175, 55, 0.1));
+            background: rgba(66, 153, 225, 0.1);
             border: 1px solid rgba(66, 153, 225, 0.2);
             filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.3));
+        }
+        
+        .nav-logo-glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212,175,55,0.2), rgba(212,175,55,0));
+            z-index: -1;
         }
         
         .nav-search {
@@ -1257,65 +1272,62 @@
         
         .footer-logo {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 15px;
             margin-bottom: 2rem;
-            flex-direction: column;
+            text-align: center;
         }
         
-        .footer-logo img {
-            height: 120px;
-            width: 120px;
+        .footer-logo-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .footer-logo-img {
+            width: 100%;
+            height: 100%;
             object-fit: contain;
             border-radius: 50%;
-            padding: 15px;
-            background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(212, 175, 55, 0.1));
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(212,175,55,0.1));
             border: 3px solid var(--gold);
-            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.5));
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
             transition: all 0.5s ease;
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3),
-                        inset 0 0 15px rgba(212, 175, 55, 0.2);
             position: relative;
-            overflow: hidden;
+            z-index: 2;
         }
-
-        .footer-logo img::before {
-            content: '';
+        
+        .footer-logo-glow {
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                to bottom right,
-                transparent,
-                transparent,
-                transparent,
-                rgba(255, 255, 255, 0.1),
-                transparent,
-                transparent,
-                transparent
-            );
-            transform: rotate(30deg);
-            animation: shine 3s infinite;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212,175,55,0.3), rgba(212,175,55,0));
+            animation: logoGlow 3s infinite alternate;
+            z-index: 1;
         }
         
-        .footer-logo:hover img {
-            transform: scale(1.08) rotate(5deg);
-            filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.7));
-        }
-        
-        .footer-logo span {
-            font-size: 2.2rem;
+        .footer-logo-text {
+            font-size: 2.5rem;
             font-weight: 700;
             font-family: 'Playfair Display', serif;
-            color: white;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
             background: linear-gradient(to right, var(--gold), var(--gold-light));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 1px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        .footer-logo:hover .footer-logo-img {
+            transform: scale(1.05) rotate(5deg);
+            filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.7));
         }
         
         .footer-links { list-style: none; }
@@ -1364,18 +1376,19 @@
         
         /* Responsive */
         @media (max-width: 1200px) { 
-            .logo { font-size: 4rem; } 
-            .logo img { height: 150px; width: 150px; } 
+            .logo-text { font-size: 4rem; } 
+            .logo-img { height: 180px; width: 180px; } 
             .tagline { font-size: 1.8rem; } 
             .section-title { font-size: 2.2rem; } 
             .gallery-main-image { height: 400px; } 
             .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); } 
-            .footer-logo img { height: 100px; width: 100px; }
+            .footer-logo-img { height: 130px; width: 130px; }
+            .footer-logo-text { font-size: 2.2rem; }
         }
         
         @media (max-width: 992px) { 
-            .logo { font-size: 3.5rem; } 
-            .logo img { height: 130px; width: 130px; } 
+            .logo-text { font-size: 3.5rem; } 
+            .logo-img { height: 160px; width: 160px; } 
             .tagline { font-size: 1.6rem; } 
             .section-title { font-size: 2rem; } 
             .contact-container { grid-template-columns: 1fr; } 
@@ -1417,13 +1430,14 @@
             .nav-search.active { display: block; } 
             .nav-container { padding: 1rem; } 
             .contact-bar { bottom: 2rem; right: 2rem; } 
-            .footer-logo img { height: 90px; width: 90px; }
+            .footer-logo-img { height: 120px; width: 120px; }
+            .footer-logo-text { font-size: 2rem; }
         }
         
         @media (max-width: 768px) { 
             header { min-height: auto; padding: 0; } 
-            .logo { font-size: 3rem; flex-direction: column; gap: 1rem; } 
-            .logo img { height: 120px; width: 120px; } 
+            .logo-text { font-size: 3rem; } 
+            .logo-img { height: 140px; width: 140px; } 
             .tagline { font-size: 1.4rem; } 
             .header-search { max-width: 90%; margin-bottom: 2rem; } 
             .header-buttons { flex-direction: column; align-items: center; gap: 1rem; } 
@@ -1439,12 +1453,13 @@
             .footer-container { grid-template-columns: 1fr 1fr; } 
             .footer-about { grid-column: 1 / -1; } 
             .modal-content { padding: 3rem; } 
-            .footer-logo img { height: 80px; width: 80px; }
+            .footer-logo-img { height: 100px; width: 100px; }
+            .footer-logo-text { font-size: 1.8rem; }
         }
         
         @media (max-width: 576px) { 
-            .logo { font-size: 2.5rem; } 
-            .logo img { height: 100px; width: 100px; } 
+            .logo-text { font-size: 2.5rem; } 
+            .logo-img { height: 120px; width: 120px; } 
             .tagline { font-size: 1.3rem; } 
             .header-buttons { flex-direction: column; align-items: center; } 
             .btn { width: 100%; } 
@@ -1459,26 +1474,33 @@
             .contact-btn { width: 55px; height: 55px; font-size: 1.6rem; } 
             .footer-container { grid-template-columns: 1fr; } 
             .modal-content { padding: 2.5rem 2rem; } 
-            .footer-logo img { height: 70px; width: 70px; }
+            .footer-logo-img { height: 90px; width: 90px; }
+            .footer-logo-text { font-size: 1.6rem; }
         }
         
         @media (max-width: 400px) { 
-            .logo { font-size: 2rem; } 
-            .logo img { height: 90px; width: 90px; } 
+            .logo-text { font-size: 2rem; } 
+            .logo-img { height: 100px; width: 100px; } 
             .tagline { font-size: 1.1rem; } 
             .section-title { font-size: 1.5rem; } 
             .gallery-main-image { height: 200px; } 
             .thumbnail { width: 70px; height: 70px; } 
-            .footer-logo img { height: 60px; width: 60px; }
+            .footer-logo-img { height: 80px; width: 80px; }
+            .footer-logo-text { font-size: 1.4rem; }
         }
     </style>
 </head>
 <body>
     <div class="loading-screen">
-        <img class="loading-logo" src="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png" alt="Anekamarket Loading Logo">
-        <h2>Anekamarket</h2>
-        <div class="loading-progress">
-            <div class="loading-progress-bar"></div>
+        <div class="loading-content">
+            <div class="loading-logo-container">
+                <img class="loading-logo" src="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png" alt="Anekamarket Loading Logo">
+                <div class="loading-logo-glow"></div>
+            </div>
+            <h2>Anekamarket</h2>
+            <div class="loading-progress">
+                <div class="loading-progress-bar"></div>
+            </div>
         </div>
     </div>
     
@@ -1492,8 +1514,11 @@
         <div class="header-overlay"></div>
         <div class="header-content">
             <div class="logo">
-                <img src="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png" alt="Anekamarket Logo">
-                <span>Anekamarket</span>
+                <div class="logo-container">
+                    <img src="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png" alt="Anekamarket Logo" class="logo-img">
+                    <div class="logo-glow"></div>
+                </div>
+                <span class="logo-text">Anekamarket</span>
             </div>
             <p class="tagline">Semua Bisa Jualan & Semua Bisa Pesan</p>
             
@@ -1519,7 +1544,10 @@
     <nav id="navbar">
         <div class="nav-container">
             <a href="#" class="nav-logo">
-                <img src="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png" alt="Anekamarket Logo">
+                <div class="nav-logo-container">
+                    <img src="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png" alt="Anekamarket Logo" class="nav-logo-img">
+                    <div class="nav-logo-glow"></div>
+                </div>
                 <span>Anekamarket</span>
             </a>
             
@@ -1766,8 +1794,11 @@
         <div class="footer-container">
             <div class="footer-col footer-about">
                 <div class="footer-logo">
-                    <img src="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png" alt="Anekamarket Logo">
-                    <span>Anekamarket</span>
+                    <div class="footer-logo-container">
+                        <img src="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png" alt="Anekamarket Logo" class="footer-logo-img">
+                        <div class="footer-logo-glow"></div>
+                    </div>
+                    <span class="footer-logo-text">Anekamarket</span>
                 </div>
                 <p>Menyediakan produk kerajinan tangan berkualitas tinggi, jasa sewa, dan solusi promosi sejak tahun 2025. Komitmen kami adalah memberikan pengalaman berbelanja online yang menyenangkan dan memuaskan.</p>
             </div>
