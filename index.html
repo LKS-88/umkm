@@ -3,481 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Code Validation System</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>ANEKAMARKET - Solusi Belanja Premium</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #4361ee;
-            --primary-dark: #3a0ca3;
-            --primary-light: #4895ef;
-            --accent: #f72585;
-            --accent-dark: #d91a6d;
-            --success: #4cc9f0;
-            --success-dark: #3aa8d8;
-            --warning: #f8961e;
-            --warning-dark: #e07e0e;
-            --danger: #ef233c;
-            --danger-dark: #d61a2a;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --gray: #6c757d;
-            --gray-light: #e9ecef;
-            --bg-gradient: linear-gradient(135deg, #f5f7ff 0%, #e8ecff 100%);
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
         }
-
+        
         body {
-            background: var(--bg-gradient);
-            color: var(--dark);
-            line-height: 1.6;
+            background: #0f0c29;  /* Dark blue background */
+            background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             min-height: 100vh;
-            overflow-x: hidden;
+            overflow: hidden;
             position: relative;
+            color: #fff;
         }
 
-        /* Enhanced Particle Background */
-        #particles-js {
+        /* Star Particle Animation */
+        .stars {
             position: fixed;
-            width: 100%;
-            height: 100%;
             top: 0;
             left: 0;
+            width: 100%;
+            height: 100%;
             z-index: 0;
-            background: var(--bg-gradient);
+            overflow: hidden;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
+        .star {
+            position: absolute;
+            background-color: #fff;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: twinkle var(--duration) ease-in-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: var(--opacity); transform: scale(1); }
+        }
+
+        @keyframes move {
+            100% {
+                transform: translate3d(var(--tx), var(--ty), 0);
+            }
+        }
+
+        .content {
             position: relative;
-            z-index: 1;
-        }
-
-        /* Header */
-        .header {
+            z-index: 2;
+            width: 100%;
+            max-width: 500px;
+            padding: 40px 30px;
+            background-color: rgba(15, 12, 41, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
             text-align: center;
-            margin-bottom: 2.5rem;
-            position: relative;
-            animation: fadeInDown 0.8s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeIn 1.5s ease;
+        }
+        
+        .logo-container {
+            margin: 0 0 25px;
+            text-align: center;
+            animation: fadeInDown 1s ease;
+        }
+        
+        .logo-img {
+            max-width: 280px;
+            height: auto;
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.5));
+            transition: transform 0.5s ease;
+            margin-bottom: 15px;
         }
 
-        .header h1 {
-            font-size: 2.5rem;
+        .logo-text {
+            font-size: 2.2rem;
             font-weight: 700;
-            background: linear-gradient(to right, var(--primary), var(--accent));
+            margin: 10px 0;
+            background: linear-gradient(90deg, #ff8a00, #e52e71, #4f00ff);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 0.5rem;
-            display: inline-block;
-            position: relative;
-            padding-bottom: 0.5rem;
+            animation: gradientShift 8s ease infinite;
+            background-size: 300% 300%;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            letter-spacing: 1px;
         }
 
-        .header h1::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(to right, var(--primary), var(--accent));
-            border-radius: 2px;
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        .header p {
-            color: var(--gray);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
+        .logo-img:hover {
+            transform: scale(1.05);
         }
-
-        /* Card */
-        .card {
-            background: rgba(255, 255, 255, 0.97);
-            border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            padding: 2rem;
-            margin-bottom: 2rem;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
+        
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             width: 100%;
-            height: 5px;
-            background: linear-gradient(to right, var(--primary), var(--accent));
+            gap: 20px;
+            margin-top: 10px;
         }
-
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .card-title {
-            font-size: 1.5rem;
+        
+        .button {
+            width: 100%;
+            padding: 18px 24px;
+            background-color: rgba(255, 255, 255, 0.08);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            font-size: 1.1rem;
             font-weight: 600;
-            color: var(--primary-dark);
-            margin-bottom: 1.5rem;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(5px);
             display: flex;
             align-items: center;
-            gap: 10px;
-        }
-
-        .card-title i {
-            color: var(--accent);
-        }
-
-        /* Form */
-        .form-group {
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--dark);
-            transition: all 0.3s ease;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
-            background: white;
-        }
-
-        /* Buttons */
-        .btn {
-            display: inline-flex;
-            align-items: center;
             justify-content: center;
-            gap: 8px;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
             z-index: 1;
         }
-
-        .btn::before {
+        
+        .button::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
+            left: -100%;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.15);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transition: 0.6s;
             z-index: -1;
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.4s ease;
+        }
+        
+        .button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        
+        .button:hover::before {
+            left: 100%;
+        }
+        
+        .button:active {
+            transform: translateY(2px);
+        }
+        
+        .button i {
+            margin-right: 12px;
+            font-size: 1.3rem;
+        }
+        
+        .button.whatsapp {
+            background: linear-gradient(135deg, rgba(37, 211, 102, 0.2), rgba(18, 140, 126, 0.3));
+            border-color: rgba(37, 211, 102, 0.5);
+        }
+        
+        .button.whatsapp:hover {
+            background: linear-gradient(135deg, rgba(37, 211, 102, 0.3), rgba(18, 140, 126, 0.4));
+        }
+        
+        .button.about {
+            background: linear-gradient(135deg, rgba(110, 69, 226, 0.2), rgba(136, 211, 206, 0.3));
+            border-color: rgba(110, 69, 226, 0.5);
+        }
+        
+        .button.about:hover {
+            background: linear-gradient(135deg, rgba(110, 69, 226, 0.3), rgba(136, 211, 206, 0.4));
+        }
+        
+        .button.products {
+            background: linear-gradient(135deg, rgba(255, 65, 108, 0.2), rgba(255, 75, 43, 0.3));
+            border-color: rgba(255, 65, 108, 0.5);
+        }
+        
+        .button.products:hover {
+            background: linear-gradient(135deg, rgba(255, 65, 108, 0.3), rgba(255, 75, 43, 0.4));
+        }
+        
+        .button.promo {
+            background: linear-gradient(135deg, rgba(255, 165, 0, 0.2), rgba(255, 140, 0, 0.3));
+            border-color: rgba(255, 165, 0, 0.5);
+        }
+        
+        .button.promo:hover {
+            background: linear-gradient(135deg, rgba(255, 165, 0, 0.3), rgba(255, 140, 0, 0.4));
         }
 
-        .btn:hover::before {
-            transform: scaleX(1);
-            transform-origin: left;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(67, 97, 238, 0.2);
-        }
-
-        .btn-accent {
-            background: var(--accent);
-            color: white;
-        }
-
-        .btn-accent:hover {
-            background: var(--accent-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(247, 37, 133, 0.2);
-        }
-
-        .btn-warning {
-            background: var(--warning);
-            color: white;
-        }
-
-        .btn-warning:hover {
-            background: var(--warning-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(248, 150, 30, 0.2);
-        }
-
-        .btn-danger {
-            background: var(--danger);
-            color: white;
-        }
-
-        .btn-danger:hover {
-            background: var(--danger-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(239, 35, 60, 0.2);
-        }
-
-        .btn-sm {
-            padding: 8px 16px;
+        .footer {
+            margin-top: 35px;
             font-size: 0.9rem;
-        }
-
-        /* Table */
-        .table-responsive {
-            overflow-x: auto;
-            margin-top: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.05);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-        }
-
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        th {
-            background: linear-gradient(to right, var(--primary), var(--primary-light));
-            color: white;
-            font-weight: 500;
-            position: sticky;
-            top: 0;
-        }
-
-        tr:nth-child(even) {
-            background: rgba(248, 249, 250, 0.5);
-        }
-
-        tr:hover {
-            background: rgba(67, 97, 238, 0.05);
-        }
-
-        /* Badges */
-        .badge {
-            display: inline-block;
-            padding: 6px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+            animation: fadeIn 2s ease;
             letter-spacing: 0.5px;
         }
 
-        .badge-success {
-            background: rgba(76, 201, 240, 0.15);
-            color: var(--success-dark);
-            border: 1px solid rgba(76, 201, 240, 0.3);
-        }
-
-        .badge-warning {
-            background: rgba(248, 150, 30, 0.15);
-            color: var(--warning-dark);
-            border: 1px solid rgba(248, 150, 30, 0.3);
-        }
-
-        .badge-danger {
-            background: rgba(239, 35, 60, 0.15);
-            color: var(--danger-dark);
-            border: 1px solid rgba(239, 35, 60, 0.3);
-        }
-
-        /* Search Box */
-        .search-box {
-            position: relative;
-            margin-bottom: 1.5rem;
-        }
-
-        .search-box input {
-            padding-left: 45px;
-            border-radius: 50px;
-            background: rgba(255, 255, 255, 0.9);
-        }
-
-        .search-box i {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--gray);
-        }
-
-        /* Validation Result */
-        .validation-result {
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin-top: 1.5rem;
-            display: none;
-            animation: fadeIn 0.5s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        }
-
-        .valid {
-            background: rgba(76, 201, 240, 0.15);
-            border-left: 4px solid var(--success);
-        }
-
-        .invalid {
-            background: rgba(239, 35, 60, 0.15);
-            border-left: 4px solid var(--danger);
-        }
-
-        .result-icon {
-            font-size: 2.5rem;
-            margin-right: 1.5rem;
-            min-width: 40px;
-        }
-
-        .valid .result-icon {
-            color: var(--success);
-        }
-
-        .invalid .result-icon {
-            color: var(--danger);
-        }
-
-        /* Admin Section */
-        .admin-section {
-            display: none;
-            animation: fadeIn 0.8s ease;
-        }
-
-        /* Login Form */
-        .login-form {
-            max-width: 500px;
-            margin: 2rem auto;
-            padding: 2.5rem;
-            background: rgba(255, 255, 255, 0.97);
-            border-radius: 16px;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
-            animation: fadeInUp 0.8s ease;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .login-form::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(to right, var(--primary), var(--accent));
-        }
-
-        .login-title {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: var(--primary);
-            font-size: 1.8rem;
-            font-weight: 600;
-        }
-
-        /* Compact Form */
-        .compact-form {
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        /* Action Buttons */
-        .action-buttons {
-            display: flex;
-            gap: 8px;
-        }
-
-        /* Backup & Restore */
-        .backup-section {
-            margin-top: 1.5rem;
-            padding: 1.5rem;
-            background: rgba(248, 249, 250, 0.6);
-            border-radius: 12px;
-            border: 1px dashed rgba(0, 0, 0, 0.1);
-        }
-
-        .backup-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 1rem;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            margin-top: 3rem;
-            color: var(--gray);
-            font-size: 0.9rem;
-            padding: 1.5rem 0;
-            border-top: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         @keyframes fadeInDown {
             from {
                 opacity: 0;
-                transform: translateY(-20px);
+                transform: translateY(-30px);
             }
             to {
                 opacity: 1;
@@ -485,819 +235,194 @@
             }
         }
 
-        /* Floating Animation */
-        .floating {
-            animation: floating 3s ease-in-out infinite;
+        /* Glow effect for logo */
+        .glow {
+            animation: glowPulse 4s ease infinite alternate;
         }
 
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+        @keyframes glowPulse {
+            0% { filter: drop-shadow(0 0 5px rgba(255, 138, 0, 0.7)); }
+            33% { filter: drop-shadow(0 0 10px rgba(229, 46, 113, 0.7)); }
+            66% { filter: drop-shadow(0 0 8px rgba(79, 0, 255, 0.7)); }
+            100% { filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.7)); }
         }
 
-        /* Pulse Animation */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 1.5rem;
-            }
-
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .card {
-                padding: 1.5rem;
-            }
-
-            .login-form {
-                padding: 1.5rem;
-            }
-
-            .action-buttons {
-                flex-direction: column;
-                gap: 6px;
-            }
-
-            .backup-actions {
-                flex-direction: column;
+        @media (max-width: 600px) {
+            .content {
+                padding: 30px 20px;
+                margin: 20px;
+                border-radius: 20px;
             }
             
-            table {
-                font-size: 0.85rem;
+            .logo-img {
+                max-width: 220px;
             }
             
-            th, td {
-                padding: 10px 12px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 1rem;
-            }
-
-            .header h1 {
+            .logo-text {
                 font-size: 1.8rem;
             }
-
-            .btn {
-                padding: 10px 18px;
-                font-size: 0.9rem;
+            
+            .button {
+                padding: 16px 20px;
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Enhanced Particle Background -->
-    <div id="particles-js"></div>
-
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1><i class="fas fa-shield-alt"></i> Premium Code Validation</h1>
-            <p>Sistem Verifikasi Kode Unik Keaslian Transaksi</p>
+    <div class="stars" id="stars"></div>
+    
+    <div class="content">
+        <div class="logo-container">
+            <img src="https://raw.githubusercontent.com/LKS-88/lentera-karya-situbondo/refs/heads/main/logo-anekamarket.png" alt="Anekamarket Logo" class="logo-img glow">
+            <div class="logo-text">ANEKAMARKET</div>
         </div>
-
-        <!-- Admin Login -->
-        <div id="adminLogin" class="login-form floating">
-            <h2 class="login-title"><i class="fas fa-lock"></i> Admin Login</h2>
-            <div class="form-group">
-                <label for="adminCode">Kode Keamanan Admin</label>
-                <input type="password" id="adminCode" class="form-control" placeholder="Masukkan kode keamanan">
-            </div>
-            <button id="loginBtn" class="btn btn-primary btn-block"><i class="fas fa-sign-in-alt"></i> Masuk</button>
+        
+        <div class="button-container">
+            <a href="#" class="button products">
+                <i class="fas fa-store"></i> Produk Kami
+            </a>
+            <a href="#" class="button promo">
+                <i class="fas fa-tag"></i> Promo Spesial
+            </a>
+            <a href="https://lks-88.github.io/lentera-karya-situbondo/" class="button about">
+                <i class="fas fa-info-circle"></i> Tentang Kami
+            </a>
+            <a href="https://wa.me/6285647709114" class="button whatsapp">
+                <i class="fab fa-whatsapp"></i> Chat WhatsApp
+            </a>
         </div>
-
-        <!-- Admin Section -->
-        <div id="adminSection" class="admin-section">
-            <!-- Form Registrasi -->
-            <div class="card">
-                <h2 class="card-title"><i class="fas fa-user-plus"></i> Form Registrasi Pembelian</h2>
-                <form id="registrationForm">
-                    <div class="form-group">
-                        <label for="purchaseDate">Tanggal & Waktu Pembelian</label>
-                        <input type="datetime-local" id="purchaseDate" class="form-control" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="customerName">Nama Lengkap</label>
-                        <input type="text" id="customerName" class="form-control" placeholder="Masukkan nama lengkap" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="customerAddress">Alamat Lengkap</label>
-                        <textarea id="customerAddress" class="form-control" rows="3" placeholder="Masukkan alamat lengkap" required></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="whatsappNumber">Nomor WhatsApp</label>
-                        <input type="tel" id="whatsappNumber" class="form-control" placeholder="Contoh: 6281234567890" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="notes">Keterangan</label>
-                        <textarea id="notes" class="form-control" rows="2" placeholder="Catatan tambahan (opsional)"></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="purchaseCode">Kode Pembelian</label>
-                        <input type="text" id="purchaseCode" class="form-control" placeholder="Masukkan kode pembelian" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="referralCode">Kode Referral</label>
-                        <input type="text" id="referralCode" class="form-control" placeholder="Masukkan kode referral" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="status">Status</label>
-                        <select id="status" class="form-control" required>
-                            <option value="Aktif">Aktif</option>
-                            <option value="Pending">Pending</option>
-                            <option value="Expired">Expired</option>
-                        </select>
-                    </div>
-                    
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <button type="submit" id="saveBtn" class="btn btn-accent"><i class="fas fa-save"></i> Simpan Data</button>
-                        <button type="button" id="cancelEdit" class="btn btn-danger" style="display: none;"><i class="fas fa-times"></i> Batal Edit</button>
-                        <button type="button" id="clearForm" class="btn btn-warning"><i class="fas fa-broom"></i> Bersihkan Form</button>
-                    </div>
-                </form>
-            </div>
-
-            <!-- Data Pembelian -->
-            <div class="card">
-                <h2 class="card-title"><i class="fas fa-database"></i> Data Pembelian Terdaftar</h2>
-                
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" id="searchData" class="form-control" placeholder="Cari data... (Nama, Kode, WhatsApp, Keterangan)">
-                </div>
-                
-                <div class="table-responsive">
-                    <table id="purchaseTable">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Tanggal</th>
-                                <th>Nama</th>
-                                <th>WhatsApp</th>
-                                <th>Kode</th>
-                                <th>Referral</th>
-                                <th>Keterangan</th>
-                                <th>Status</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody id="purchaseTableBody">
-                            <!-- Data akan dimuat di sini -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Backup & Restore -->
-            <div class="card">
-                <h2 class="card-title"><i class="fas fa-cog"></i> Pengaturan Admin</h2>
-                
-                <div class="backup-section">
-                    <h3><i class="fas fa-database"></i> Backup & Restore Data</h3>
-                    <p>Cadangkan atau pulihkan data pembelian.</p>
-                    
-                    <div class="backup-actions">
-                        <button id="backupBtn" class="btn btn-primary"><i class="fas fa-download"></i> Backup Data</button>
-                        <button id="restoreBtn" class="btn btn-warning"><i class="fas fa-upload"></i> Restore Data</button>
-                        <input type="file" id="restoreFile" accept=".json" style="display: none;">
-                        <button id="resetBtn" class="btn btn-danger"><i class="fas fa-trash"></i> Reset Data</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Logout -->
-            <button id="logoutBtn" class="btn btn-danger btn-block"><i class="fas fa-sign-out-alt"></i> Keluar Admin</button>
-        </div>
-
-        <!-- Public Section (Validasi Kode) -->
-        <div class="card compact-form">
-            <h2 class="card-title"><i class="fas fa-search"></i> Validasi Kode Referral</h2>
-            
-            <div class="form-group">
-                <label for="searchReferral">Masukkan Kode Referral</label>
-                <div class="search-box">
-                    <i class="fas fa-tag"></i>
-                    <input type="text" id="searchReferral" class="form-control" placeholder="Contoh: REF-BUDI-001">
-                </div>
-            </div>
-            
-            <button id="validateBtn" class="btn btn-primary btn-block"><i class="fas fa-check-circle"></i> Validasi Kode</button>
-            
-            <div id="validationResult" class="validation-result">
-                <div style="display: flex; align-items: center;">
-                    <i class="fas result-icon"></i>
-                    <div>
-                        <h3 id="resultTitle"></h3>
-                        <p id="resultDetails"></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Footer -->
+        
         <div class="footer">
-            <p>&copy; 2025 <strong>Premium Code Validation System</strong>. All rights reserved.</p>
+            &copy; 2023 ANEKAMARKET. All Rights Reserved.
         </div>
     </div>
 
-    <!-- Particles.js Library -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    
     <script>
+        // Enhanced Star Particle Animation
         document.addEventListener('DOMContentLoaded', function() {
-            // Enhanced particles.js configuration
-            particlesJS("particles-js", {
-                "particles": {
-                    "number": {
-                        "value": 120,
-                        "density": {
-                            "enable": true,
-                            "value_area": 800
-                        }
-                    },
-                    "color": {
-                        "value": ["#4361ee", "#3a0ca3", "#f72585", "#4cc9f0", "#4895ef"]
-                    },
-                    "shape": {
-                        "type": "circle",
-                        "stroke": {
-                            "width": 0,
-                            "color": "#000000"
-                        },
-                        "polygon": {
-                            "nb_sides": 5
-                        }
-                    },
-                    "opacity": {
-                        "value": 0.5,
-                        "random": true,
-                        "anim": {
-                            "enable": true,
-                            "speed": 1,
-                            "opacity_min": 0.2,
-                            "sync": false
-                        }
-                    },
-                    "size": {
-                        "value": 4,
-                        "random": true,
-                        "anim": {
-                            "enable": true,
-                            "speed": 4,
-                            "size_min": 1,
-                            "sync": false
-                        }
-                    },
-                    "line_linked": {
-                        "enable": true,
-                        "distance": 120,
-                        "color": "#4361ee",
-                        "opacity": 0.3,
-                        "width": 1.5
-                    },
-                    "move": {
-                        "enable": true,
-                        "speed": 3,
-                        "direction": "none",
-                        "random": true,
-                        "straight": false,
-                        "out_mode": "out",
-                        "bounce": false,
-                        "attract": {
-                            "enable": true,
-                            "rotateX": 800,
-                            "rotateY": 1600
-                        }
-                    }
-                },
-                "interactivity": {
-                    "detect_on": "canvas",
-                    "events": {
-                        "onhover": {
-                            "enable": true,
-                            "mode": "grab"
-                        },
-                        "onclick": {
-                            "enable": true,
-                            "mode": "push"
-                        },
-                        "resize": true
-                    },
-                    "modes": {
-                        "grab": {
-                            "distance": 150,
-                            "line_linked": {
-                                "opacity": 0.5
-                            }
-                        },
-                        "bubble": {
-                            "distance": 400,
-                            "size": 40,
-                            "duration": 2,
-                            "opacity": 0.8,
-                            "speed": 3
-                        },
-                        "repulse": {
-                            "distance": 200,
-                            "duration": 0.4
-                        },
-                        "push": {
-                            "particles_nb": 6
-                        },
-                        "remove": {
-                            "particles_nb": 2
-                        }
-                    }
-                },
-                "retina_detect": true
-            });
-
-            // Kode Admin
-            const ADMIN_CODE = "Admin.13579";
+            const starsContainer = document.getElementById('stars');
+            const starCount = Math.floor(window.innerWidth / 10);
             
-            // Variabel untuk edit mode
-            let isEditing = false;
-            let currentEditId = null;
+            // Create stars
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // Random size between 2px and 6px (larger stars)
+                const size = Math.random() * 4 + 2;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                // Random position
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                
+                // Random animation properties
+                const duration = Math.random() * 5 + 3;
+                const delay = Math.random() * 5;
+                const opacity = Math.random() * 0.7 + 0.3;
+                
+                star.style.setProperty('--duration', `${duration}s`);
+                star.style.setProperty('--opacity', opacity);
+                star.style.animationDelay = `${delay}s`;
+                
+                // Add movement animation
+                const tx = (Math.random() - 0.5) * 200;
+                const ty = (Math.random() - 0.5) * 200;
+                star.style.setProperty('--tx', `${tx}px`);
+                star.style.setProperty('--ty', `${ty}px`);
+                star.style.animation += `, move ${duration * 3}s ease-in-out infinite alternate`;
+                
+                starsContainer.appendChild(star);
+            }
             
-            // Data Awal (Jika localStorage kosong)
-            let purchaseData = JSON.parse(localStorage.getItem('purchaseData')) || [
-                {
-                    id: 1,
-                    date: "2025-05-15T14:30",
-                    name: "Budi Santoso",
-                    address: "Jl. Merdeka No. 123, Jakarta",
-                    whatsapp: "6281234567890",
-                    notes: "Pembelian paket premium",
-                    purchaseCode: "PRD-2025-001",
-                    referralCode: "REF-BUDI-001",
-                    status: "Aktif"
-                },
-                {
-                    id: 2,
-                    date: "2025-05-16T10:15",
-                    name: "Ani Wijaya",
-                    address: "Jl. Sudirman No. 45, Bandung",
-                    whatsapp: "6282345678901",
-                    notes: "Pembelian paket standard",
-                    purchaseCode: "PRD-2025-002",
-                    referralCode: "REF-ANI-002",
-                    status: "Aktif"
-                },
-                {
-                    id: 3,
-                    date: "2025-05-17T16:45",
-                    name: "Citra Dewi",
-                    address: "Jl. Gatot Subroto No. 67, Surabaya",
-                    whatsapp: "6283456789012",
-                    notes: "Pembelian paket trial",
-                    purchaseCode: "PRD-2025-003",
-                    referralCode: "REF-CITRA-003",
-                    status: "Pending"
-                },
-                {
-                    id: 4,
-                    date: "2025-05-18T09:20",
-                    name: "Doni Pratama",
-                    address: "Jl. Thamrin No. 89, Medan",
-                    whatsapp: "6284567890123",
-                    notes: "Pembelian paket premium",
-                    purchaseCode: "PRD-2025-004",
-                    referralCode: "REF-DONI-004",
-                    status: "Aktif"
-                },
-                {
-                    id: 5,
-                    date: "2025-05-19T13:10",
-                    name: "Eka Sari",
-                    address: "Jl. Asia Afrika No. 12, Yogyakarta",
-                    whatsapp: "6285678901234",
-                    notes: "Pembelian paket standard",
-                    purchaseCode: "PRD-2025-005",
-                    referralCode: "REF-EKA-005",
-                    status: "Expired"
-                }
-            ];
-
-            // Simpan ke localStorage
-            function saveData() {
-                localStorage.setItem('purchaseData', JSON.stringify(purchaseData));
-            }
-
-            // Inisialisasi
-            init();
-
-            function init() {
-                // Set tanggal default ke waktu sekarang
-                const now = new Date();
-                const formattedNow = now.toISOString().slice(0, 16);
-                document.getElementById('purchaseDate').value = formattedNow;
+            // Add occasional shooting stars
+            setInterval(createShootingStar, 3000);
+            
+            function createShootingStar() {
+                if (Math.random() > 0.3) return; // 30% chance
                 
-                renderPurchaseTable();
+                const shootingStar = document.createElement('div');
+                shootingStar.classList.add('star');
+                shootingStar.style.width = '3px';
+                shootingStar.style.height = '3px';
+                shootingStar.style.backgroundColor = '#fff';
+                shootingStar.style.borderRadius = '50%';
+                shootingStar.style.position = 'absolute';
+                shootingStar.style.boxShadow = '0 0 10px 2px rgba(255, 255, 255, 0.8)';
                 
-                // Cek login admin
-                if (sessionStorage.getItem('adminLoggedIn') === 'true') {
-                    document.getElementById('adminLogin').style.display = 'none';
-                    document.getElementById('adminSection').style.display = 'block';
-                }
-            }
-
-            // Login Admin
-            document.getElementById('loginBtn').addEventListener('click', function() {
-                const adminCode = document.getElementById('adminCode').value;
+                // Start from random edge
+                const startSide = Math.floor(Math.random() * 4);
+                let startX, startY, endX, endY;
                 
-                if (adminCode === ADMIN_CODE) {
-                    document.getElementById('adminLogin').style.display = 'none';
-                    document.getElementById('adminSection').style.display = 'block';
-                    sessionStorage.setItem('adminLoggedIn', 'true');
-                    document.getElementById('adminCode').value = ''; // Reset input
-                    
-                    // Animate admin section
-                    const adminSection = document.getElementById('adminSection');
-                    adminSection.style.animation = 'none';
-                    setTimeout(() => {
-                        adminSection.style.animation = 'fadeIn 0.8s ease';
-                    }, 10);
-                } else {
-                    alert('Kode keamanan salah!');
-                    document.getElementById('adminCode').value = '';
-                    
-                    // Shake animation for wrong password
-                    const loginForm = document.getElementById('adminLogin');
-                    loginForm.style.animation = 'none';
-                    setTimeout(() => {
-                        loginForm.style.animation = 'shake 0.5s ease';
-                    }, 10);
-                    
-                    setTimeout(() => {
-                        loginForm.style.animation = 'floating 3s ease-in-out infinite';
-                    }, 600);
+                switch(startSide) {
+                    case 0: // top
+                        startX = Math.random() * 100;
+                        startY = 0;
+                        endX = startX + (Math.random() * 60 - 30);
+                        endY = 100;
+                        break;
+                    case 1: // right
+                        startX = 100;
+                        startY = Math.random() * 100;
+                        endX = 0;
+                        endY = startY + (Math.random() * 60 - 30);
+                        break;
+                    case 2: // bottom
+                        startX = Math.random() * 100;
+                        startY = 100;
+                        endX = startX + (Math.random() * 60 - 30);
+                        endY = 0;
+                        break;
+                    case 3: // left
+                        startX = 0;
+                        startY = Math.random() * 100;
+                        endX = 100;
+                        endY = startY + (Math.random() * 60 - 30);
+                        break;
                 }
-            });
-
-            // Logout Admin
-            document.getElementById('logoutBtn').addEventListener('click', function() {
-                sessionStorage.removeItem('adminLoggedIn');
-                document.getElementById('adminLogin').style.display = 'block';
-                document.getElementById('adminSection').style.display = 'none';
-                resetForm();
                 
-                // Re-enable floating animation
-                const loginForm = document.getElementById('adminLogin');
-                loginForm.style.animation = 'floating 3s ease-in-out infinite';
-            });
-
-            // Render Tabel Data
-            function renderPurchaseTable(filteredData = null) {
-                const data = filteredData || purchaseData;
-                const tableBody = document.getElementById('purchaseTableBody');
-                tableBody.innerHTML = '';
-
-                if (data.length === 0) {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `<td colspan="9" style="text-align: center; padding: 2rem;">Tidak ada data yang tersedia</td>`;
-                    tableBody.appendChild(row);
-                    return;
-                }
-
-                data.forEach((item, index) => {
-                    const row = document.createElement('tr');
-                    row.style.animation = 'fadeIn 0.5s ease';
-                    
-                    // Tentukan badge berdasarkan status
-                    let badgeClass = 'badge-success';
-                    if (item.status === 'Pending') badgeClass = 'badge-warning';
-                    if (item.status === 'Expired') badgeClass = 'badge-danger';
-                    
-                    // Format tanggal
-                    const formattedDate = formatDateTime(item.date);
-                    
-                    row.innerHTML = `
-                        <td>${index + 1}</td>
-                        <td>${formattedDate}</td>
-                        <td>${item.name}</td>
-                        <td>${item.whatsapp}</td>
-                        <td><code>${item.purchaseCode}</code></td>
-                        <td><code>${item.referralCode}</code></td>
-                        <td>${item.notes || '-'}</td>
-                        <td><span class="badge ${badgeClass}">${item.status}</span></td>
-                        <td class="action-buttons">
-                            <button onclick="editPurchase(${item.id})" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Edit</button>
-                            <button onclick="deletePurchase(${item.id})" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Hapus</button>
-                        </td>
-                    `;
-                    
-                    tableBody.appendChild(row);
+                shootingStar.style.left = `${startX}%`;
+                shootingStar.style.top = `${startY}%`;
+                
+                const trail = document.createElement('div');
+                trail.style.position = 'absolute';
+                trail.style.width = '100px';
+                trail.style.height = '2px';
+                trail.style.background = 'linear-gradient(90deg, rgba(255,255,255,1), rgba(255,255,255,0))';
+                trail.style.transformOrigin = 'left center';
+                trail.style.pointerEvents = 'none';
+                
+                // Calculate angle for trail
+                const angle = Math.atan2(endY - startY, endX - startX) * 180 / Math.PI;
+                trail.style.transform = `rotate(${angle}deg)`;
+                trail.style.left = '0';
+                trail.style.top = '0';
+                
+                shootingStar.appendChild(trail);
+                starsContainer.appendChild(shootingStar);
+                
+                // Animate shooting star
+                shootingStar.animate([
+                    { 
+                        transform: 'translate(0, 0)',
+                        opacity: 1 
+                    },
+                    { 
+                        transform: `translate(${endX - startX}vw, ${endY - startY}vh)`,
+                        opacity: 0 
+                    }
+                ], {
+                    duration: 1000,
+                    easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
                 });
-            }
-
-            // Format Tanggal
-            function formatDateTime(dateTimeString) {
-                const date = new Date(dateTimeString);
-                return date.toLocaleString('id-ID', {
-                    day: '2-digit',
-                    month: '2-digit',
-                    year: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                });
-            }
-
-            // Form Submission (Simpan/Edit Data)
-            document.getElementById('registrationForm').addEventListener('submit', function(e) {
-                e.preventDefault();
                 
-                const formData = {
-                    id: isEditing ? currentEditId : purchaseData.length > 0 ? Math.max(...purchaseData.map(item => item.id)) + 1 : 1,
-                    date: document.getElementById('purchaseDate').value,
-                    name: document.getElementById('customerName').value,
-                    address: document.getElementById('customerAddress').value,
-                    whatsapp: document.getElementById('whatsappNumber').value,
-                    notes: document.getElementById('notes').value,
-                    purchaseCode: document.getElementById('purchaseCode').value,
-                    referralCode: document.getElementById('referralCode').value,
-                    status: document.getElementById('status').value
-                };
-                
-                if (isEditing) {
-                    // Update data
-                    const index = purchaseData.findIndex(item => item.id === currentEditId);
-                    if (index !== -1) {
-                        purchaseData[index] = formData;
-                    }
-                } else {
-                    // Tambah data baru
-                    purchaseData.push(formData);
-                }
-                
-                saveData();
-                renderPurchaseTable();
-                resetForm();
-                
-                // Show success animation
-                const saveBtn = document.getElementById('saveBtn');
-                saveBtn.innerHTML = '<i class="fas fa-check"></i> Berhasil!';
-                saveBtn.style.backgroundColor = '#00a76f';
-                
+                // Remove after animation
                 setTimeout(() => {
-                    saveBtn.innerHTML = isEditing ? '<i class="fas fa-save"></i> Update Data' : '<i class="fas fa-save"></i> Simpan Data';
-                    saveBtn.style.backgroundColor = '';
-                }, 2000);
-            });
-
-            // Edit Data
-            window.editPurchase = function(id) {
-                const purchase = purchaseData.find(item => item.id === id);
-                if (purchase) {
-                    document.getElementById('purchaseDate').value = purchase.date;
-                    document.getElementById('customerName').value = purchase.name;
-                    document.getElementById('customerAddress').value = purchase.address;
-                    document.getElementById('whatsappNumber').value = purchase.whatsapp;
-                    document.getElementById('notes').value = purchase.notes;
-                    document.getElementById('purchaseCode').value = purchase.purchaseCode;
-                    document.getElementById('referralCode').value = purchase.referralCode;
-                    document.getElementById('status').value = purchase.status;
-                    
-                    isEditing = true;
-                    currentEditId = id;
-                    document.getElementById('saveBtn').innerHTML = '<i class="fas fa-save"></i> Update Data';
-                    document.getElementById('cancelEdit').style.display = 'inline-block';
-                    
-                    // Scroll ke form dengan animasi
-                    document.getElementById('registrationForm').scrollIntoView({ 
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            };
-
-            // Hapus Data
-            window.deletePurchase = function(id) {
-                if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
-                    purchaseData = purchaseData.filter(item => item.id !== id);
-                    saveData();
-                    renderPurchaseTable();
-                    if (isEditing && currentEditId === id) {
-                        resetForm();
-                    }
-                    
-                    // Show delete animation
-                    const deleteBtn = event.target;
-                    deleteBtn.innerHTML = '<i class="fas fa-check"></i> Terhapus!';
-                    deleteBtn.style.backgroundColor = '#00a76f';
-                    
-                    setTimeout(() => {
-                        deleteBtn.innerHTML = '<i class="fas fa-trash"></i> Hapus';
-                        deleteBtn.style.backgroundColor = '';
-                    }, 1500);
-                }
-            };
-
-            // Reset Form
-            function resetForm() {
-                document.getElementById('registrationForm').reset();
-                // Set tanggal default ke waktu sekarang
-                const now = new Date();
-                const formattedNow = now.toISOString().slice(0, 16);
-                document.getElementById('purchaseDate').value = formattedNow;
-                
-                isEditing = false;
-                currentEditId = null;
-                document.getElementById('saveBtn').innerHTML = '<i class="fas fa-save"></i> Simpan Data';
-                document.getElementById('cancelEdit').style.display = 'none';
+                    shootingStar.remove();
+                }, 1000);
             }
-
-            // Batal Edit
-            document.getElementById('cancelEdit').addEventListener('click', resetForm);
-
-            // Bersihkan Form (clear semua input)
-            document.getElementById('clearForm').addEventListener('click', function() {
-                if (confirm('Apakah Anda yakin ingin membersihkan semua input form?')) {
-                    resetForm();
-                    
-                    // Show clear animation
-                    const clearBtn = document.getElementById('clearForm');
-                    clearBtn.innerHTML = '<i class="fas fa-check"></i> Terhapus!';
-                    clearBtn.style.backgroundColor = '#00a76f';
-                    
-                    setTimeout(() => {
-                        clearBtn.innerHTML = '<i class="fas fa-broom"></i> Bersihkan Form';
-                        clearBtn.style.backgroundColor = '';
-                    }, 1500);
-                }
-            });
-
-            // Pencarian Data
-            document.getElementById('searchData').addEventListener('input', function() {
-                const searchTerm = this.value.toLowerCase();
-                const filteredData = purchaseData.filter(item => 
-                    item.name.toLowerCase().includes(searchTerm) ||
-                    item.whatsapp.includes(searchTerm) ||
-                    item.purchaseCode.toLowerCase().includes(searchTerm) ||
-                    item.referralCode.toLowerCase().includes(searchTerm) ||
-                    (item.notes && item.notes.toLowerCase().includes(searchTerm))
-                );
-                renderPurchaseTable(filteredData);
-            });
-
-            // Validasi Kode Referral (Publik)
-            document.getElementById('validateBtn').addEventListener('click', function() {
-                const referralCode = document.getElementById('searchReferral').value.trim();
-                const resultDiv = document.getElementById('validationResult');
-                const resultTitle = document.getElementById('resultTitle');
-                const resultDetails = document.getElementById('resultDetails');
-                const resultIcon = resultDiv.querySelector('.result-icon');
-                
-                if (!referralCode) {
-                    alert('Masukkan kode referral terlebih dahulu!');
-                    return;
-                }
-                
-                const foundPurchase = purchaseData.find(item => item.referralCode === referralCode);
-                
-                if (foundPurchase) {
-                    resultDiv.className = 'validation-result valid';
-                    resultIcon.className = 'fas fa-check-circle result-icon';
-                    resultTitle.textContent = 'Kode Valid!';
-                    resultDetails.innerHTML = `
-                        Kode referral <strong>${referralCode}</strong> terdaftar.<br>
-                        Status: <span class="badge ${foundPurchase.status === 'Aktif' ? 'badge-success' : foundPurchase.status === 'Pending' ? 'badge-warning' : 'badge-danger'}">${foundPurchase.status}</span><br>
-                        Atas Nama: ${foundPurchase.name}<br>
-                        Tanggal: ${formatDateTime(foundPurchase.date)}<br>
-                        Keterangan: ${foundPurchase.notes || '-'}
-                    `;
-                } else {
-                    resultDiv.className = 'validation-result invalid';
-                    resultIcon.className = 'fas fa-times-circle result-icon';
-                    resultTitle.textContent = 'Kode Tidak Valid!';
-                    resultDetails.textContent = `Kode referral ${referralCode} tidak terdaftar dalam sistem kami.`;
-                }
-                
-                resultDiv.style.display = 'flex';
-                
-                // Button animation
-                const validateBtn = document.getElementById('validateBtn');
-                validateBtn.innerHTML = '<i class="fas fa-check"></i> Selesai!';
-                validateBtn.style.backgroundColor = foundPurchase ? '#00a76f' : '#ff4242';
-                
-                setTimeout(() => {
-                    validateBtn.innerHTML = '<i class="fas fa-check-circle"></i> Validasi Kode';
-                    validateBtn.style.backgroundColor = '';
-                }, 1500);
-            });
-
-            // Backup Data (Download JSON)
-            document.getElementById('backupBtn').addEventListener('click', function() {
-                const dataStr = JSON.stringify(purchaseData, null, 2);
-                const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
-                const exportName = `backup_purchase_data_${new Date().toISOString().slice(0, 10)}.json`;
-                
-                const link = document.createElement('a');
-                link.setAttribute('href', dataUri);
-                link.setAttribute('download', exportName);
-                link.click();
-                
-                // Button animation
-                const backupBtn = document.getElementById('backupBtn');
-                backupBtn.innerHTML = '<i class="fas fa-check"></i> Tersimpan!';
-                backupBtn.style.backgroundColor = '#00a76f';
-                
-                setTimeout(() => {
-                    backupBtn.innerHTML = '<i class="fas fa-download"></i> Backup Data';
-                    backupBtn.style.backgroundColor = '';
-                }, 1500);
-            });
-
-            // Restore Data (Upload JSON)
-            document.getElementById('restoreBtn').addEventListener('click', function() {
-                document.getElementById('restoreFile').click();
-            });
-
-            document.getElementById('restoreFile').addEventListener('change', function(e) {
-                const file = e.target.files[0];
-                if (!file) return;
-                
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    try {
-                        const importedData = JSON.parse(e.target.result);
-                        if (Array.isArray(importedData) && importedData.length > 0) {
-                            if (confirm('Apakah Anda yakin ingin memulihkan data? Data saat ini akan diganti.')) {
-                                purchaseData = importedData;
-                                saveData();
-                                renderPurchaseTable();
-                                
-                                // Button animation
-                                const restoreBtn = document.getElementById('restoreBtn');
-                                restoreBtn.innerHTML = '<i class="fas fa-check"></i> Dipulihkan!';
-                                restoreBtn.style.backgroundColor = '#00a76f';
-                                
-                                setTimeout(() => {
-                                    restoreBtn.innerHTML = '<i class="fas fa-upload"></i> Restore Data';
-                                    restoreBtn.style.backgroundColor = '';
-                                }, 1500);
-                            }
-                        } else {
-                            alert('File tidak valid! Pastikan file berisi data yang benar.');
-                        }
-                    } catch (error) {
-                        alert('Gagal memproses file: ' + error.message);
-                    }
-                };
-                reader.readAsText(file);
-                e.target.value = ''; // Reset input file
-            });
-
-            // Reset Data
-            document.getElementById('resetBtn').addEventListener('click', function() {
-                if (confirm('PERINGATAN: Apakah Anda yakin ingin mereset semua data? Tindakan ini tidak dapat dibatalkan dan semua data akan hilang.')) {
-                    purchaseData = [];
-                    saveData();
-                    renderPurchaseTable();
-                    
-                    // Button animation
-                    const resetBtn = document.getElementById('resetBtn');
-                    resetBtn.innerHTML = '<i class="fas fa-check"></i> Terreset!';
-                    resetBtn.style.backgroundColor = '#00a76f';
-                    
-                    setTimeout(() => {
-                        resetBtn.innerHTML = '<i class="fas fa-trash"></i> Reset Data';
-                        resetBtn.style.backgroundColor = '';
-                    }, 1500);
-                }
-            });
-
-            // Add shake animation to CSS
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes shake {
-                    0%, 100% { transform: translateX(0); }
-                    10%, 30%, 50%, 70%, 90% { transform: translateX(-8px); }
-                    20%, 40%, 60%, 80% { transform: translateX(8px); }
-                }
-                @keyframes pulse {
-                    0% { transform: scale(1); }
-                    50% { transform: scale(1.05); }
-                    100% { transform: scale(1); }
-                }
-            `;
-            document.head.appendChild(style);
         });
     </script>
 </body>
