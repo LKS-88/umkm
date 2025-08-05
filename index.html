@@ -38,7 +38,7 @@
                 radial-gradient(circle at 20% 30%, rgba(31, 96, 196, 0.15) 0%, transparent 25%),
                 radial-gradient(circle at 80% 70%, rgba(156, 39, 176, 0.15) 0%, transparent 25%),
                 radial-gradient(circle at 40% 80%, rgba(255, 193, 7, 0.1) 0%, transparent 25%);
-            z-index: -2;
+            z-index: -3;
             animation: cosmicPulse 20s infinite alternate;
         }
 
@@ -234,7 +234,7 @@
                 transparent 70%);
             filter: blur(40px);
             animation: nebulaPulse 15s ease infinite alternate;
-            z-index: -1;
+            z-index: -2;
         }
 
         .nebula.gold {
@@ -255,6 +255,39 @@
             0% { transform: scale(0.8); opacity: 0.4; }
             50% { transform: scale(1.4); opacity: 0.6; }
             100% { transform: scale(0.8); opacity: 0.4; }
+        }
+
+        /* Constellation Effect */
+        .constellation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .constellation-dot {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            filter: blur(0.5px);
+            animation: twinkle 3s infinite alternate;
+        }
+
+        .constellation-line {
+            position: absolute;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.15);
+            transform-origin: left center;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(0.8); }
+            100% { opacity: 0.8; transform: scale(1.1); }
         }
 
         /* Main Content - Luxury Card */
@@ -535,6 +568,7 @@
 <body>
     <div class="cosmic-bg"></div>
     <div class="particles" id="particles"></div>
+    <div class="constellation" id="constellation"></div>
     <div class="nebula" style="top:10%; left:10%;"></div>
     <div class="nebula gold" style="bottom:15%; right:10%;"></div>
     <div class="nebula purple" style="top:60%; left:70%;"></div>
@@ -569,7 +603,11 @@
         // Ultra Premium Particle System
         document.addEventListener('DOMContentLoaded', function() {
             const particlesContainer = document.getElementById('particles');
-            const particleCount = Math.floor(window.innerWidth);
+            const constellationContainer = document.getElementById('constellation');
+            const particleCount = Math.floor(window.innerWidth * 1.5);
+            
+            // Create constellation
+            createConstellation();
             
             // Create luxury particles
             for (let i = 0; i < particleCount; i++) {
@@ -577,7 +615,7 @@
             }
             
             // Create frequent shooting stars
-            setInterval(createShootingStar, 1500);
+            setInterval(createShootingStar, 1200);
             
             function createParticle() {
                 const particle = document.createElement('div');
@@ -617,7 +655,7 @@
             }
             
             function createShootingStar() {
-                if (Math.random() > 0.6) return; // 40% chance
+                if (Math.random() > 0.5) return; // 50% chance
                 
                 const star = document.createElement('div');
                 star.classList.add('shooting-star');
@@ -666,6 +704,63 @@
                 setTimeout(() => {
                     star.remove();
                 }, duration * 1000);
+            }
+            
+            function createConstellation() {
+                // Create constellation dots
+                const dotCount = 30;
+                const dots = [];
+                
+                for (let i = 0; i < dotCount; i++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('constellation-dot');
+                    
+                    // Random position
+                    dot.style.left = `${Math.random() * 100}%`;
+                    dot.style.top = `${Math.random() * 100}%`;
+                    
+                    // Random size
+                    const size = Math.random() * 2 + 1;
+                    dot.style.width = `${size}px`;
+                    dot.style.height = `${size}px`;
+                    
+                    // Random opacity
+                    dot.style.opacity = Math.random() * 0.5 + 0.3;
+                    
+                    constellationContainer.appendChild(dot);
+                    dots.push(dot);
+                }
+                
+                // Create constellation lines
+                const lineCount = 15;
+                for (let i = 0; i < lineCount; i++) {
+                    const line = document.createElement('div');
+                    line.classList.add('constellation-line');
+                    
+                    const dot1 = dots[Math.floor(Math.random() * dots.length)];
+                    const dot2 = dots[Math.floor(Math.random() * dots.length)];
+                    
+                    if (dot1 && dot2) {
+                        const rect1 = dot1.getBoundingClientRect();
+                        const rect2 = dot2.getBoundingClientRect();
+                        
+                        const x1 = rect1.left + rect1.width/2;
+                        const y1 = rect1.top + rect1.height/2;
+                        const x2 = rect2.left + rect2.width/2;
+                        const y2 = rect2.top + rect2.height/2;
+                        
+                        const length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+                        const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+                        
+                        line.style.width = `${length}px`;
+                        line.style.left = `${x1}px`;
+                        line.style.top = `${y1}px`;
+                        line.style.transform = `rotate(${angle}deg)`;
+                        line.style.opacity = Math.random() * 0.2 + 0.1;
+                        
+                        constellationContainer.appendChild(line);
+                    }
+                }
             }
         });
     </script>
