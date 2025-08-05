@@ -16,7 +16,7 @@
         }
         
         body {
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            background: linear-gradient(135deg, #0a1929, #122b3d, #1d3b53);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
             display: flex;
@@ -35,7 +35,7 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Particle Animation */
+        /* Premium Particle Animation */
         .particles {
             position: fixed;
             top: 0;
@@ -48,21 +48,67 @@
 
         .particle {
             position: absolute;
-            background-color: rgba(255, 255, 255, 0.8);
             border-radius: 50%;
             pointer-events: none;
-            filter: blur(0.5px);
             animation: float 15s linear infinite;
+            opacity: 0;
         }
 
-        .particle:nth-child(3n+1) {
-            background-color: rgba(255, 255, 255, 0.6);
+        /* Diamond Particles */
+        .particle.diamond {
+            background: radial-gradient(circle at 30% 30%, 
+                rgba(255, 255, 255, 0.9) 0%, 
+                rgba(200, 230, 255, 0.7) 50%, 
+                transparent 70%);
+            box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.5);
+            transform: rotate(45deg);
         }
-        .particle:nth-child(3n+2) {
-            background-color: rgba(200, 230, 255, 0.7);
+
+        /* Circle Particles */
+        .particle.circle {
+            background: radial-gradient(circle at center, 
+                rgba(255, 255, 255, 0.9) 0%, 
+                rgba(255, 240, 200, 0.7) 50%, 
+                transparent 70%);
+            box-shadow: 0 0 8px 1px rgba(255, 255, 255, 0.4);
         }
-        .particle:nth-child(3n+3) {
-            background-color: rgba(255, 240, 200, 0.6);
+
+        /* Star Particles */
+        .particle.star {
+            background: transparent;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 10px solid rgba(255, 255, 255, 0.9);
+            transform: rotate(18deg);
+            box-shadow: 0 0 10px 1px rgba(255, 255, 255, 0.5);
+        }
+
+        .particle.star::before {
+            content: '';
+            position: absolute;
+            top: 1px;
+            left: -5px;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 10px solid rgba(255, 255, 255, 0.9);
+            transform: rotate(72deg);
+        }
+
+        .particle.star::after {
+            content: '';
+            position: absolute;
+            top: 1px;
+            left: -5px;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 10px solid rgba(255, 255, 255, 0.9);
+            transform: rotate(-72deg);
         }
 
         @keyframes float {
@@ -82,7 +128,7 @@
             }
         }
 
-        /* Shooting Stars */
+        /* Premium Shooting Stars */
         .shooting-star {
             position: absolute;
             width: 4px;
@@ -90,9 +136,24 @@
             background: white;
             border-radius: 50%;
             filter: blur(1px);
-            box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8),
+                        0 0 20px 5px rgba(100, 200, 255, 0.6);
             animation: shooting 3s linear infinite;
             opacity: 0;
+        }
+
+        .shooting-star::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                rgba(255, 255, 255, 0) 0%, 
+                rgba(255, 255, 255, 0.8) 50%, 
+                rgba(255, 255, 255, 0) 100%);
+            transform: translate(-50%, -50%);
         }
 
         @keyframes shooting {
@@ -109,6 +170,27 @@
             }
         }
 
+        /* Glow Effect */
+        .glow {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: radial-gradient(circle, 
+                rgba(100, 200, 255, 0.3) 0%, 
+                rgba(100, 200, 255, 0.1) 50%, 
+                transparent 70%);
+            filter: blur(20px);
+            animation: pulse 8s ease infinite alternate;
+            z-index: -1;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.3; }
+            50% { transform: scale(1.2); opacity: 0.5; }
+            100% { transform: scale(0.8); opacity: 0.3; }
+        }
+
         /* Main Content */
         .content {
             position: relative;
@@ -116,12 +198,12 @@
             width: 90%;
             max-width: 500px;
             padding: 40px 30px;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            background: rgba(15, 30, 45, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3),
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5),
                         inset 0 0 20px rgba(255, 255, 255, 0.05);
             text-align: center;
             animation: fadeIn 1s ease-out;
@@ -138,9 +220,9 @@
             background: linear-gradient(
                 to bottom right,
                 rgba(255, 255, 255, 0) 0%,
-                rgba(255, 255, 255, 0.01) 45%,
-                rgba(255, 255, 255, 0.03) 50%,
-                rgba(255, 255, 255, 0.01) 55%,
+                rgba(255, 255, 255, 0.02) 45%,
+                rgba(255, 255, 255, 0.05) 50%,
+                rgba(255, 255, 255, 0.02) 55%,
                 rgba(255, 255, 255, 0) 100%
             );
             transform: rotate(30deg);
@@ -284,7 +366,7 @@
         }
 
         .button.promo {
-            background: linear-gradient(135deg, rgba(255, 165, 0, 0.7), rgba(255, 140, 0, 0.8));
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.7), rgba(255, 152, 0, 0.8));
         }
 
         .button.about {
@@ -353,6 +435,8 @@
 </head>
 <body>
     <div class="particles" id="particles"></div>
+    <div class="glow" style="top:20%; left:10%;"></div>
+    <div class="glow" style="bottom:15%; right:10%;"></div>
     
     <div class="content">
         <div class="logo-container">
@@ -381,27 +465,39 @@
     </div>
 
     <script>
-        // Enhanced Particle System
+        // Premium Particle System
         document.addEventListener('DOMContentLoaded', function() {
             const particlesContainer = document.getElementById('particles');
-            const particleCount = Math.floor(window.innerWidth / 3);
+            const particleCount = Math.floor(window.innerWidth / 2);
             
-            // Create normal particles
+            // Create premium particles
             for (let i = 0; i < particleCount; i++) {
                 createParticle();
             }
             
             // Create occasional shooting stars
-            setInterval(createShootingStar, 3000);
+            setInterval(createShootingStar, 2500);
             
             function createParticle() {
                 const particle = document.createElement('div');
-                particle.classList.add('particle');
+                const particleTypes = ['diamond', 'circle', 'star'];
+                const type = particleTypes[Math.floor(Math.random() * particleTypes.length)];
                 
-                // Random size between 2px and 6px
-                const size = Math.random() * 4 + 2;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
+                particle.classList.add('particle', type);
+                
+                // Random size based on type
+                let size;
+                if (type === 'diamond') {
+                    size = Math.random() * 8 + 4;
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                } else if (type === 'circle') {
+                    size = Math.random() * 6 + 3;
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                } else { // star
+                    size = Math.random() * 10 + 5;
+                }
                 
                 // Random position (start below viewport)
                 particle.style.left = `${Math.random() * 100}%`;
@@ -414,14 +510,16 @@
                 // Random delay
                 particle.style.animationDelay = `${Math.random() * 15}s`;
                 
-                // Random blur
-                particle.style.filter = `blur(${Math.random()}px)`;
+                // Random blur for circles and diamonds
+                if (type !== 'star') {
+                    particle.style.filter = `blur(${Math.random() * 0.5}px)`;
+                }
                 
                 particlesContainer.appendChild(particle);
             }
             
             function createShootingStar() {
-                if (Math.random() > 0.3) return; // 30% chance
+                if (Math.random() > 0.4) return; // 40% chance
                 
                 const star = document.createElement('div');
                 star.classList.add('shooting-star');
@@ -437,9 +535,18 @@
                     star.style.top = `${Math.random() * 100}%`;
                 }
                 
+                // Random size and color
+                const size = Math.random() * 3 + 2;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
                 // Random animation duration
-                const duration = Math.random() * 2 + 2;
+                const duration = Math.random() * 2 + 1.5;
                 star.style.animationDuration = `${duration}s`;
+                
+                // Random color
+                const colors = ['#ffffff', '#a7e8ff', '#ffd7a7', '#d7a7ff'];
+                star.style.background = colors[Math.floor(Math.random() * colors.length)];
                 
                 particlesContainer.appendChild(star);
                 
