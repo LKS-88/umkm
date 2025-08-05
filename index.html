@@ -2,10 +2,10 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ANEKAMARKET - Solusi Belanja Premium</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* Reset & Base Styles */
         * {
@@ -13,6 +13,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
         
         body {
@@ -22,12 +23,13 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            overflow: hidden;
+            overflow-x: hidden;
             position: relative;
             color: #fff;
+            touch-action: manipulation;
         }
 
-        /* Cosmic Background */
+        /* Background & Particle Effects (Optimized for Mobile) */
         .cosmic-bg {
             position: fixed;
             top: 0;
@@ -35,20 +37,11 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 20% 30%, rgba(31, 96, 196, 0.15) 0%, transparent 25%),
-                radial-gradient(circle at 80% 70%, rgba(156, 39, 176, 0.15) 0%, transparent 25%),
-                radial-gradient(circle at 40% 80%, rgba(255, 193, 7, 0.1) 0%, transparent 25%);
+                radial-gradient(circle at 20% 30%, rgba(31, 96, 196, 0.12) 0%, transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(156, 39, 176, 0.12) 0%, transparent 25%);
             z-index: -3;
-            animation: cosmicPulse 20s infinite alternate;
         }
 
-        @keyframes cosmicPulse {
-            0% { opacity: 0.8; }
-            50% { opacity: 1; }
-            100% { opacity: 0.8; }
-        }
-
-        /* Premium Particle Animation */
         .particles {
             position: fixed;
             top: 0;
@@ -59,153 +52,54 @@
             overflow: hidden;
         }
 
-        /* Diamond Particle */
-        .particle.diamond {
+        .particle {
             position: absolute;
-            width: 12px;
-            height: 12px;
-            background: linear-gradient(135deg, 
-                rgba(255,255,255,0.95) 0%, 
-                rgba(220,240,255,0.85) 50%, 
-                rgba(200,230,255,0.7) 100%);
-            transform: rotate(45deg);
-            box-shadow: 0 0 25px 8px rgba(180, 220, 255, 0.7),
-                        0 0 45px 15px rgba(150, 200, 255, 0.4);
-            animation: floatDiamond 25s linear infinite;
-            opacity: 0;
-            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
-        }
-
-        /* Gold Particle */
-        .particle.gold {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: radial-gradient(circle at center,
-                rgba(255,215,0,0.95) 0%,
-                rgba(255,195,0,0.85) 70%,
-                rgba(255,175,0,0.6) 100%);
+            background-color: rgba(255, 255, 255, 0.8);
             border-radius: 50%;
-            box-shadow: 0 0 20px 5px rgba(255, 215, 0, 0.6);
-            animation: floatGold 20s linear infinite;
-            opacity: 0;
-            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.7));
-        }
-
-        /* Star Particle */
-        .particle.star {
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-left: 5px solid transparent;
-            border-right: 5px solid transparent;
-            border-bottom: 10px solid rgba(255, 255, 255, 0.95);
-            transform: rotate(18deg);
-            filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.9));
-            animation: floatStar 30s linear infinite;
+            pointer-events: none;
+            filter: blur(0.5px);
+            animation: float 15s linear infinite;
             opacity: 0;
         }
 
-        .particle.star::before, .particle.star::after {
-            content: '';
-            position: absolute;
-            top: 1px;
-            left: -5px;
-            width: 0;
-            height: 0;
-            border-left: 5px solid transparent;
-            border-right: 5px solid transparent;
-            border-bottom: 10px solid rgba(255, 255, 255, 0.95);
+        .particle:nth-child(3n+1) {
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+        .particle:nth-child(3n+2) {
+            background-color: rgba(200, 230, 255, 0.7);
+        }
+        .particle:nth-child(3n+3) {
+            background-color: rgba(255, 240, 200, 0.6);
         }
 
-        .particle.star::before {
-            transform: rotate(72deg);
-        }
-
-        .particle.star::after {
-            transform: rotate(-72deg);
-        }
-
-        /* Particle Animations */
-        @keyframes floatDiamond {
+        @keyframes float {
             0% {
-                transform: translateY(110vh) translateX(0) rotate(0deg);
+                transform: translateY(100vh) translateX(0) rotate(0deg);
                 opacity: 0;
             }
             10% {
-                opacity: 0.9;
-            }
-            90% {
-                opacity: 0.9;
-            }
-            100% {
-                transform: translateY(-100px) translateX(100px) rotate(720deg);
-                opacity: 0;
-            }
-        }
-
-        @keyframes floatGold {
-            0% {
-                transform: translateY(105vh) translateX(0) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.8;
-            }
-            90% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(-100px) translateX(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        @keyframes floatStar {
-            0% {
-                transform: translateY(120vh) translateX(0) rotate(0deg);
-                opacity: 0;
-            }
-            5% {
                 opacity: 1;
             }
-            95% {
+            90% {
                 opacity: 1;
             }
             100% {
-                transform: translateY(-100px) translateX(-150px) rotate(900deg);
+                transform: translateY(-100px) translateX(100px) rotate(360deg);
                 opacity: 0;
             }
         }
 
-        /* Shooting Stars */
+        /* Shooting Stars (Optimized) */
         .shooting-star {
             position: absolute;
-            width: 4px;
-            height: 4px;
+            width: 2px;
+            height: 2px;
             background: white;
             border-radius: 50%;
-            filter: blur(1px);
-            box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.95),
-                        0 0 35px 10px rgba(100, 200, 255, 0.8);
+            filter: blur(0.5px);
+            box-shadow: 0 0 8px 1px rgba(255, 255, 255, 0.8);
             animation: shooting 2s linear infinite;
             opacity: 0;
-            z-index: -1;
-        }
-
-        .shooting-star::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 200px;
-            height: 1px;
-            background: linear-gradient(90deg, 
-                rgba(255, 255, 255, 0) 0%, 
-                rgba(255, 255, 255, 0.95) 50%, 
-                rgba(255, 255, 255, 0) 100%);
-            transform: translate(-50%, -50%);
         }
 
         @keyframes shooting {
@@ -217,95 +111,27 @@
                 opacity: 1;
             }
             100% {
-                transform: translateX(800px) translateY(500px);
+                transform: translateX(200px) translateY(150px);
                 opacity: 0;
             }
         }
 
-        /* Nebula Glow Effects */
-        .nebula {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background: radial-gradient(circle, 
-                rgba(31, 96, 196, 0.3) 0%, 
-                rgba(31, 96, 196, 0.15) 50%, 
-                transparent 70%);
-            filter: blur(40px);
-            animation: nebulaPulse 15s ease infinite alternate;
-            z-index: -2;
-        }
-
-        .nebula.gold {
-            background: radial-gradient(circle, 
-                rgba(255, 193, 7, 0.25) 0%, 
-                rgba(255, 152, 0, 0.12) 50%, 
-                transparent 70%);
-        }
-
-        .nebula.purple {
-            background: radial-gradient(circle, 
-                rgba(156, 39, 176, 0.25) 0%, 
-                rgba(103, 58, 183, 0.12) 50%, 
-                transparent 70%);
-        }
-
-        @keyframes nebulaPulse {
-            0% { transform: scale(0.8); opacity: 0.4; }
-            50% { transform: scale(1.4); opacity: 0.6; }
-            100% { transform: scale(0.8); opacity: 0.4; }
-        }
-
-        /* Constellation Effect */
-        .constellation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .constellation-dot {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 50%;
-            filter: blur(0.5px);
-            animation: twinkle 3s infinite alternate;
-        }
-
-        .constellation-line {
-            position: absolute;
-            height: 1px;
-            background: rgba(255, 255, 255, 0.15);
-            transform-origin: left center;
-        }
-
-        @keyframes twinkle {
-            0% { opacity: 0.3; transform: scale(0.8); }
-            100% { opacity: 0.8; transform: scale(1.1); }
-        }
-
-        /* Main Content - Luxury Card */
+        /* Main Content Card (Responsive) */
         .content {
             position: relative;
             z-index: 10;
-            width: 90%;
-            max-width: 550px;
-            padding: 50px 40px;
-            background: rgba(15, 23, 42, 0.5);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border-radius: 28px;
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7),
-                        inset 0 0 30px rgba(255, 255, 255, 0.1);
+            width: 92%;
+            max-width: 400px;
+            padding: 30px 20px;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5),
+                        inset 0 0 15px rgba(255, 255, 255, 0.08);
             text-align: center;
-            animation: fadeIn 1.5s ease-out;
+            margin: 20px 0;
             overflow: hidden;
         }
 
@@ -319,13 +145,13 @@
             background: linear-gradient(
                 to bottom right,
                 rgba(255, 255, 255, 0) 0%,
-                rgba(255, 255, 255, 0.04) 45%,
-                rgba(255, 255, 255, 0.1) 50%,
-                rgba(255, 255, 255, 0.04) 55%,
+                rgba(255, 255, 255, 0.03) 45%,
+                rgba(255, 255, 255, 0.06) 50%,
+                rgba(255, 255, 255, 0.03) 55%,
                 rgba(255, 255, 255, 0) 100%
             );
             transform: rotate(30deg);
-            animation: shine 12s infinite;
+            animation: shine 10s infinite;
             z-index: -1;
         }
 
@@ -336,42 +162,28 @@
 
         /* Logo Section */
         .logo-container {
-            margin: 0 0 40px;
+            margin: 0 0 25px;
             text-align: center;
-            animation: fadeInDown 1.2s ease-out;
-            position: relative;
         }
 
         .logo-img {
-            max-width: 320px;
+            max-width: 180px;
             height: auto;
-            margin-bottom: 25px;
-            transition: all 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
-            filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.7));
-            position: relative;
-            z-index: 1;
-        }
-
-        .logo-img:hover {
-            transform: scale(1.08) rotate(-3deg);
-            filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.5));
+            margin-bottom: 15px;
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.5));
         }
 
         .logo-text {
-            font-size: 3rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            font-family: 'Playfair Display', serif;
-            background: linear-gradient(90deg, #fff, #d7e8ff, #fff);
+            background: linear-gradient(90deg, #fff, #a7e8ff, #fff);
             background-size: 200% auto;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            animation: shineText 4s linear infinite;
-            margin: 20px 0;
-            letter-spacing: 4px;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-            position: relative;
-            display: inline-block;
+            animation: shineText 3s linear infinite;
+            margin: 10px 0;
+            letter-spacing: 1.5px;
         }
 
         @keyframes shineText {
@@ -382,52 +194,51 @@
         .logo-text::after {
             content: '';
             position: absolute;
-            bottom: -15px;
+            bottom: -8px;
             left: 50%;
             transform: translateX(-50%);
-            width: 140px;
-            height: 5px;
+            width: 80px;
+            height: 2px;
             background: linear-gradient(90deg, transparent, #3498db, #2ecc71, transparent);
-            border-radius: 5px;
-            animation: linePulse 4s ease infinite;
+            border-radius: 2px;
+            animation: linePulse 3s ease infinite;
         }
 
         @keyframes linePulse {
-            0%, 100% { width: 140px; opacity: 1; }
-            50% { width: 200px; opacity: 0.8; }
+            0%, 100% { width: 80px; opacity: 1; }
+            50% { width: 120px; opacity: 0.8; }
         }
 
-        /* Luxury Buttons */
+        /* Buttons (Touch-Friendly) */
         .button-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 100%;
-            gap: 25px;
-            margin-top: 30px;
+            gap: 15px;
+            margin-top: 20px;
         }
 
         .button {
             width: 100%;
-            padding: 22px 35px;
+            padding: 16px 20px;
             color: white;
             border: none;
-            border-radius: 16px;
-            font-size: 1.3rem;
+            border-radius: 12px;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             text-align: center;
             text-decoration: none;
-            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
-            z-index: 1;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .button::before {
@@ -437,130 +248,79 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: 0.8s;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
             z-index: -1;
         }
 
-        .button:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        .button:hover, .button:focus {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
         }
 
-        .button:hover::before {
+        .button:hover::before, .button:focus::before {
             left: 100%;
         }
 
         .button:active {
-            transform: translateY(4px);
+            transform: translateY(1px);
         }
 
         .button i {
-            margin-right: 18px;
-            font-size: 1.5rem;
+            margin-right: 10px;
+            font-size: 1.1rem;
         }
 
-        /* Luxury Button Styles */
+        /* Button Colors */
         .button.products {
-            background: linear-gradient(135deg, 
-                rgba(46, 204, 113, 0.85), 
-                rgba(39, 174, 96, 0.95));
-            box-shadow: 0 12px 30px rgba(46, 204, 113, 0.4);
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.8), rgba(39, 174, 96, 0.9));
         }
 
         .button.promo {
-            background: linear-gradient(135deg, 
-                rgba(255, 193, 7, 0.85), 
-                rgba(255, 152, 0, 0.95));
-            box-shadow: 0 12px 30px rgba(255, 193, 7, 0.4);
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.8), rgba(255, 152, 0, 0.9));
         }
 
         .button.about {
-            background: linear-gradient(135deg, 
-                rgba(52, 152, 219, 0.85), 
-                rgba(41, 128, 185, 0.95));
-            box-shadow: 0 12px 30px rgba(52, 152, 219, 0.4);
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.8), rgba(41, 128, 185, 0.9));
         }
 
         .button.whatsapp {
-            background: linear-gradient(135deg, 
-                rgba(37, 211, 102, 0.85), 
-                rgba(18, 140, 126, 0.95));
-            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.4);
+            background: linear-gradient(135deg, rgba(37, 211, 102, 0.8), rgba(18, 140, 126, 0.9));
         }
 
-        /* Luxury Footer */
+        /* Footer */
         .footer {
-            margin-top: 45px;
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.75);
+            margin-top: 25px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
             text-align: center;
-            animation: fadeIn 3s ease;
-            letter-spacing: 1.5px;
-            text-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
-            position: relative;
+            letter-spacing: 0.5px;
         }
 
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 70%;
-            height: 1px;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.4), 
-                transparent);
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 600px) {
+        /* Responsive Adjustments */
+        @media (max-width: 400px) {
             .content {
-                padding: 40px 30px;
-                border-radius: 24px;
+                padding: 25px 15px;
+                border-radius: 16px;
             }
 
             .logo-img {
-                max-width: 260px;
+                max-width: 150px;
             }
 
             .logo-text {
-                font-size: 2.4rem;
+                font-size: 1.6rem;
             }
 
             .button {
-                padding: 20px 30px;
-                font-size: 1.2rem;
+                padding: 14px 18px;
+                font-size: 0.95rem;
             }
         }
 
-        @media (max-width: 400px) {
+        @media (max-width: 350px) {
             .logo-text {
-                font-size: 2.2rem;
-            }
-            
-            .button i {
-                margin-right: 12px;
-                font-size: 1.3rem;
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -568,10 +328,6 @@
 <body>
     <div class="cosmic-bg"></div>
     <div class="particles" id="particles"></div>
-    <div class="constellation" id="constellation"></div>
-    <div class="nebula" style="top:10%; left:10%;"></div>
-    <div class="nebula gold" style="bottom:15%; right:10%;"></div>
-    <div class="nebula purple" style="top:60%; left:70%;"></div>
     
     <div class="content">
         <div class="logo-container">
@@ -600,103 +356,62 @@
     </div>
 
     <script>
-        // Ultra Premium Particle System
+        // Mobile-Optimized Particle System
         document.addEventListener('DOMContentLoaded', function() {
             const particlesContainer = document.getElementById('particles');
-            const constellationContainer = document.getElementById('constellation');
-            const particleCount = Math.floor(window.innerWidth * 1.5);
+            const particleCount = Math.floor(window.innerWidth / 3);
             
-            // Create constellation
-            createConstellation();
-            
-            // Create luxury particles
+            // Create particles
             for (let i = 0; i < particleCount; i++) {
                 createParticle();
             }
             
-            // Create frequent shooting stars
-            setInterval(createShootingStar, 1200);
+            // Create occasional shooting stars
+            setInterval(createShootingStar, 3000);
             
             function createParticle() {
                 const particle = document.createElement('div');
-                const particleTypes = ['diamond', 'gold', 'star'];
-                const type = particleTypes[Math.floor(Math.random() * particleTypes.length)];
+                particle.classList.add('particle');
                 
-                particle.classList.add('particle', type);
-                
-                // Random size variation
-                let sizeModifier = Math.random() * 0.6 + 0.7;
-                
-                // Adjust properties based on type
-                if (type === 'diamond') {
-                    particle.style.width = `${12 * sizeModifier}px`;
-                    particle.style.height = `${12 * sizeModifier}px`;
-                } else if (type === 'gold') {
-                    particle.style.width = `${8 * sizeModifier}px`;
-                    particle.style.height = `${8 * sizeModifier}px`;
-                }
+                // Random size between 1px and 4px
+                const size = Math.random() * 3 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
                 
                 // Random position (start below viewport)
                 particle.style.left = `${Math.random() * 100}%`;
                 particle.style.top = `${Math.random() * 100 + 100}%`;
                 
                 // Random animation duration
-                const duration = Math.random() * 20 + 15;
+                const duration = Math.random() * 15 + 10;
                 particle.style.animationDuration = `${duration}s`;
                 
                 // Random delay
-                particle.style.animationDelay = `${Math.random() * 25}s`;
-                
-                // Random scale and opacity
-                particle.style.transform = `scale(${Math.random() * 0.6 + 0.7})`;
-                particle.style.opacity = Math.random() * 0.3 + 0.7;
+                particle.style.animationDelay = `${Math.random() * 15}s`;
                 
                 particlesContainer.appendChild(particle);
             }
             
             function createShootingStar() {
-                if (Math.random() > 0.5) return; // 50% chance
+                if (Math.random() > 0.3) return; // 30% chance
                 
                 const star = document.createElement('div');
                 star.classList.add('shooting-star');
                 
-                // Random start position (top, right, or left edge)
-                const startPos = Math.random();
-                if (startPos > 0.66) {
+                // Random start position (top or right edge)
+                if (Math.random() > 0.5) {
                     // Start from top
                     star.style.left = `${Math.random() * 100}%`;
                     star.style.top = '0';
-                } else if (startPos > 0.33) {
+                } else {
                     // Start from right
                     star.style.left = '100%';
                     star.style.top = `${Math.random() * 100}%`;
-                } else {
-                    // Start from left
-                    star.style.left = '0';
-                    star.style.top = `${Math.random() * 100}%`;
                 }
-                
-                // Random size
-                const size = Math.random() * 4 + 2;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
                 
                 // Random animation duration
                 const duration = Math.random() * 1.5 + 1;
                 star.style.animationDuration = `${duration}s`;
-                
-                // Random color with matching glow
-                const colors = [
-                    { main: '#ffffff', glow: 'rgba(100, 200, 255, 0.8)' }, // white with blue glow
-                    { main: '#a7e8ff', glow: 'rgba(167, 232, 255, 0.8)' }, // light blue
-                    { main: '#ffd7a7', glow: 'rgba(255, 215, 167, 0.8)' }, // light gold
-                    { main: '#d7a7ff', glow: 'rgba(215, 167, 255, 0.8)' }  // light purple
-                ];
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                
-                star.style.background = color.main;
-                star.style.boxShadow = `0 0 20px 5px ${color.main},
-                                       0 0 35px 10px ${color.glow}`;
                 
                 particlesContainer.appendChild(star);
                 
@@ -704,63 +419,6 @@
                 setTimeout(() => {
                     star.remove();
                 }, duration * 1000);
-            }
-            
-            function createConstellation() {
-                // Create constellation dots
-                const dotCount = 30;
-                const dots = [];
-                
-                for (let i = 0; i < dotCount; i++) {
-                    const dot = document.createElement('div');
-                    dot.classList.add('constellation-dot');
-                    
-                    // Random position
-                    dot.style.left = `${Math.random() * 100}%`;
-                    dot.style.top = `${Math.random() * 100}%`;
-                    
-                    // Random size
-                    const size = Math.random() * 2 + 1;
-                    dot.style.width = `${size}px`;
-                    dot.style.height = `${size}px`;
-                    
-                    // Random opacity
-                    dot.style.opacity = Math.random() * 0.5 + 0.3;
-                    
-                    constellationContainer.appendChild(dot);
-                    dots.push(dot);
-                }
-                
-                // Create constellation lines
-                const lineCount = 15;
-                for (let i = 0; i < lineCount; i++) {
-                    const line = document.createElement('div');
-                    line.classList.add('constellation-line');
-                    
-                    const dot1 = dots[Math.floor(Math.random() * dots.length)];
-                    const dot2 = dots[Math.floor(Math.random() * dots.length)];
-                    
-                    if (dot1 && dot2) {
-                        const rect1 = dot1.getBoundingClientRect();
-                        const rect2 = dot2.getBoundingClientRect();
-                        
-                        const x1 = rect1.left + rect1.width/2;
-                        const y1 = rect1.top + rect1.height/2;
-                        const x2 = rect2.left + rect2.width/2;
-                        const y2 = rect2.top + rect2.height/2;
-                        
-                        const length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-                        const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
-                        
-                        line.style.width = `${length}px`;
-                        line.style.left = `${x1}px`;
-                        line.style.top = `${y1}px`;
-                        line.style.transform = `rotate(${angle}deg)`;
-                        line.style.opacity = Math.random() * 0.2 + 0.1;
-                        
-                        constellationContainer.appendChild(line);
-                    }
-                }
             }
         });
     </script>
