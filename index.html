@@ -16,25 +16,46 @@
         }
         
         body {
-            background: radial-gradient(ellipse at bottom, #0d1d31 0%, #0c0d13 100%);
+            background: #0a0e17;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            overflow-x: hidden;
+            overflow: hidden;
             position: relative;
             color: #fff;
         }
 
-        /* Luxury Particle Animation */
+        /* Cosmic Background */
+        .cosmic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(31, 96, 196, 0.15) 0%, transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(156, 39, 176, 0.15) 0%, transparent 25%),
+                radial-gradient(circle at 40% 80%, rgba(255, 193, 7, 0.1) 0%, transparent 25%);
+            z-index: -2;
+            animation: cosmicPulse 20s infinite alternate;
+        }
+
+        @keyframes cosmicPulse {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { opacity: 0.8; }
+        }
+
+        /* Premium Particle Animation */
         .particles {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0;
+            z-index: -1;
             overflow: hidden;
         }
 
@@ -44,15 +65,16 @@
             width: 12px;
             height: 12px;
             background: linear-gradient(135deg, 
-                rgba(255,255,255,0.9) 0%, 
-                rgba(220,240,255,0.8) 50%, 
-                rgba(200,230,255,0.6) 100%);
+                rgba(255,255,255,0.95) 0%, 
+                rgba(220,240,255,0.85) 50%, 
+                rgba(200,230,255,0.7) 100%);
             transform: rotate(45deg);
-            box-shadow: 0 0 20px 5px rgba(180, 220, 255, 0.6),
-                        0 0 40px 10px rgba(150, 200, 255, 0.3);
+            box-shadow: 0 0 25px 8px rgba(180, 220, 255, 0.7),
+                        0 0 45px 15px rgba(150, 200, 255, 0.4);
             animation: floatDiamond 25s linear infinite;
             opacity: 0;
             clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
         }
 
         /* Gold Particle */
@@ -61,40 +83,26 @@
             width: 8px;
             height: 8px;
             background: radial-gradient(circle at center,
-                rgba(255,215,0,0.9) 0%,
-                rgba(255,195,0,0.8) 70%,
-                rgba(255,175,0,0.5) 100%);
+                rgba(255,215,0,0.95) 0%,
+                rgba(255,195,0,0.85) 70%,
+                rgba(255,175,0,0.6) 100%);
             border-radius: 50%;
-            box-shadow: 0 0 15px 3px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 0 20px 5px rgba(255, 215, 0, 0.6);
             animation: floatGold 20s linear infinite;
             opacity: 0;
+            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.7));
         }
 
-        /* Platinum Particle */
-        .particle.platinum {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: radial-gradient(circle at center,
-                rgba(230,230,230,0.9) 0%,
-                rgba(210,210,210,0.8) 70%,
-                rgba(190,190,190,0.5) 100%);
-            border-radius: 50%;
-            box-shadow: 0 0 10px 2px rgba(230, 230, 230, 0.6);
-            animation: floatPlatinum 18s linear infinite;
-            opacity: 0;
-        }
-
-        /* Luxury Star Particle */
+        /* Star Particle */
         .particle.star {
             position: absolute;
             width: 0;
             height: 0;
-            border-left: 6px solid transparent;
-            border-right: 6px solid transparent;
-            border-bottom: 12px solid rgba(255, 255, 255, 0.9);
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 10px solid rgba(255, 255, 255, 0.95);
             transform: rotate(18deg);
-            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+            filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.9));
             animation: floatStar 30s linear infinite;
             opacity: 0;
         }
@@ -103,12 +111,12 @@
             content: '';
             position: absolute;
             top: 1px;
-            left: -6px;
+            left: -5px;
             width: 0;
             height: 0;
-            border-left: 6px solid transparent;
-            border-right: 6px solid transparent;
-            border-bottom: 12px solid rgba(255, 255, 255, 0.9);
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 10px solid rgba(255, 255, 255, 0.95);
         }
 
         .particle.star::before {
@@ -126,10 +134,10 @@
                 opacity: 0;
             }
             10% {
-                opacity: 0.8;
+                opacity: 0.9;
             }
             90% {
-                opacity: 0.8;
+                opacity: 0.9;
             }
             100% {
                 transform: translateY(-100px) translateX(100px) rotate(720deg);
@@ -143,30 +151,13 @@
                 opacity: 0;
             }
             10% {
-                opacity: 0.7;
+                opacity: 0.8;
             }
             90% {
-                opacity: 0.7;
+                opacity: 0.8;
             }
             100% {
                 transform: translateY(-100px) translateX(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        @keyframes floatPlatinum {
-            0% {
-                transform: translateY(115vh) translateX(0) rotate(0deg);
-                opacity: 0;
-            }
-            15% {
-                opacity: 0.6;
-            }
-            85% {
-                opacity: 0.6;
-            }
-            100% {
-                transform: translateY(-100px) translateX(150px) rotate(540deg);
                 opacity: 0;
             }
         }
@@ -188,7 +179,7 @@
             }
         }
 
-        /* Luxury Shooting Stars */
+        /* Shooting Stars */
         .shooting-star {
             position: absolute;
             width: 4px;
@@ -196,10 +187,11 @@
             background: white;
             border-radius: 50%;
             filter: blur(1px);
-            box-shadow: 0 0 15px 3px rgba(255, 255, 255, 0.9),
-                        0 0 30px 6px rgba(100, 200, 255, 0.7);
-            animation: shooting 2.5s linear infinite;
+            box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.95),
+                        0 0 35px 10px rgba(100, 200, 255, 0.8);
+            animation: shooting 2s linear infinite;
             opacity: 0;
+            z-index: -1;
         }
 
         .shooting-star::before {
@@ -207,11 +199,11 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 150px;
+            width: 200px;
             height: 1px;
             background: linear-gradient(90deg, 
                 rgba(255, 255, 255, 0) 0%, 
-                rgba(255, 255, 255, 0.9) 50%, 
+                rgba(255, 255, 255, 0.95) 50%, 
                 rgba(255, 255, 255, 0) 100%);
             transform: translate(-50%, -50%);
         }
@@ -225,61 +217,44 @@
                 opacity: 1;
             }
             100% {
-                transform: translateX(600px) translateY(400px);
+                transform: translateX(800px) translateY(500px);
                 opacity: 0;
             }
         }
 
-        /* Luxury Glow Effects */
-        .glow {
+        /* Nebula Glow Effects */
+        .nebula {
             position: absolute;
-            width: 200px;
-            height: 200px;
+            width: 300px;
+            height: 300px;
             border-radius: 50%;
             background: radial-gradient(circle, 
-                rgba(100, 200, 255, 0.4) 0%, 
-                rgba(100, 200, 255, 0.2) 50%, 
+                rgba(31, 96, 196, 0.3) 0%, 
+                rgba(31, 96, 196, 0.15) 50%, 
                 transparent 70%);
-            filter: blur(30px);
-            animation: pulse 10s ease infinite alternate;
+            filter: blur(40px);
+            animation: nebulaPulse 15s ease infinite alternate;
             z-index: -1;
         }
 
-        .glow.gold {
+        .nebula.gold {
             background: radial-gradient(circle, 
-                rgba(255, 215, 0, 0.3) 0%, 
-                rgba(255, 195, 0, 0.15) 50%, 
+                rgba(255, 193, 7, 0.25) 0%, 
+                rgba(255, 152, 0, 0.12) 50%, 
                 transparent 70%);
         }
 
-        @keyframes pulse {
-            0% { transform: scale(0.8); opacity: 0.3; }
-            50% { transform: scale(1.3); opacity: 0.5; }
-            100% { transform: scale(0.8); opacity: 0.3; }
+        .nebula.purple {
+            background: radial-gradient(circle, 
+                rgba(156, 39, 176, 0.25) 0%, 
+                rgba(103, 58, 183, 0.12) 50%, 
+                transparent 70%);
         }
 
-        /* Constellation Effect */
-        .constellation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .constellation-line {
-            position: absolute;
-            height: 1px;
-            background: rgba(255, 255, 255, 0.1);
-            transform-origin: left center;
-            animation: twinkle 5s infinite alternate;
-        }
-
-        @keyframes twinkle {
-            0% { opacity: 0.1; }
-            100% { opacity: 0.3; }
+        @keyframes nebulaPulse {
+            0% { transform: scale(0.8); opacity: 0.4; }
+            50% { transform: scale(1.4); opacity: 0.6; }
+            100% { transform: scale(0.8); opacity: 0.4; }
         }
 
         /* Main Content - Luxury Card */
@@ -287,15 +262,15 @@
             position: relative;
             z-index: 10;
             width: 90%;
-            max-width: 520px;
-            padding: 45px 35px;
-            background: rgba(15, 25, 40, 0.5);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6),
-                        inset 0 0 25px rgba(255, 255, 255, 0.08);
+            max-width: 550px;
+            padding: 50px 40px;
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7),
+                        inset 0 0 30px rgba(255, 255, 255, 0.1);
             text-align: center;
             animation: fadeIn 1.5s ease-out;
             overflow: hidden;
@@ -311,13 +286,13 @@
             background: linear-gradient(
                 to bottom right,
                 rgba(255, 255, 255, 0) 0%,
-                rgba(255, 255, 255, 0.03) 45%,
-                rgba(255, 255, 255, 0.08) 50%,
-                rgba(255, 255, 255, 0.03) 55%,
+                rgba(255, 255, 255, 0.04) 45%,
+                rgba(255, 255, 255, 0.1) 50%,
+                rgba(255, 255, 255, 0.04) 55%,
                 rgba(255, 255, 255, 0) 100%
             );
             transform: rotate(30deg);
-            animation: shine 10s infinite;
+            animation: shine 12s infinite;
             z-index: -1;
         }
 
@@ -328,29 +303,29 @@
 
         /* Logo Section */
         .logo-container {
-            margin: 0 0 35px;
+            margin: 0 0 40px;
             text-align: center;
-            animation: fadeInDown 1s ease-out;
+            animation: fadeInDown 1.2s ease-out;
             position: relative;
         }
 
         .logo-img {
-            max-width: 300px;
+            max-width: 320px;
             height: auto;
-            margin-bottom: 20px;
-            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-            filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.6));
+            margin-bottom: 25px;
+            transition: all 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
+            filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.7));
             position: relative;
             z-index: 1;
         }
 
         .logo-img:hover {
-            transform: scale(1.06) rotate(-3deg);
-            filter: drop-shadow(0 12px 25px rgba(0, 0, 0, 0.4));
+            transform: scale(1.08) rotate(-3deg);
+            filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.5));
         }
 
         .logo-text {
-            font-size: 2.8rem;
+            font-size: 3rem;
             font-weight: 700;
             font-family: 'Playfair Display', serif;
             background: linear-gradient(90deg, #fff, #d7e8ff, #fff);
@@ -359,9 +334,9 @@
             background-clip: text;
             color: transparent;
             animation: shineText 4s linear infinite;
-            margin: 15px 0;
-            letter-spacing: 3px;
-            text-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+            margin: 20px 0;
+            letter-spacing: 4px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
             position: relative;
             display: inline-block;
         }
@@ -374,19 +349,19 @@
         .logo-text::after {
             content: '';
             position: absolute;
-            bottom: -12px;
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 120px;
-            height: 4px;
+            width: 140px;
+            height: 5px;
             background: linear-gradient(90deg, transparent, #3498db, #2ecc71, transparent);
-            border-radius: 4px;
+            border-radius: 5px;
             animation: linePulse 4s ease infinite;
         }
 
         @keyframes linePulse {
-            0%, 100% { width: 120px; opacity: 1; }
-            50% { width: 180px; opacity: 0.8; }
+            0%, 100% { width: 140px; opacity: 1; }
+            50% { width: 200px; opacity: 0.8; }
         }
 
         /* Luxury Buttons */
@@ -395,31 +370,31 @@
             flex-direction: column;
             align-items: center;
             width: 100%;
-            gap: 22px;
-            margin-top: 25px;
+            gap: 25px;
+            margin-top: 30px;
         }
 
         .button {
             width: 100%;
-            padding: 20px 30px;
+            padding: 22px 35px;
             color: white;
             border: none;
-            border-radius: 14px;
-            font-size: 1.2rem;
+            border-radius: 16px;
+            font-size: 1.3rem;
             font-weight: 600;
             cursor: pointer;
             text-align: center;
             text-decoration: none;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
             z-index: 1;
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .button::before {
@@ -429,14 +404,14 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
-            transition: 0.7s;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.8s;
             z-index: -1;
         }
 
         .button:hover {
-            transform: translateY(-7px);
-            box-shadow: 0 18px 35px rgba(0, 0, 0, 0.4);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
         }
 
         .button:hover::before {
@@ -444,79 +419,79 @@
         }
 
         .button:active {
-            transform: translateY(3px);
+            transform: translateY(4px);
         }
 
         .button i {
-            margin-right: 15px;
-            font-size: 1.4rem;
+            margin-right: 18px;
+            font-size: 1.5rem;
         }
 
         /* Luxury Button Styles */
         .button.products {
             background: linear-gradient(135deg, 
-                rgba(46, 204, 113, 0.8), 
-                rgba(39, 174, 96, 0.9));
-            box-shadow: 0 10px 25px rgba(46, 204, 113, 0.3);
+                rgba(46, 204, 113, 0.85), 
+                rgba(39, 174, 96, 0.95));
+            box-shadow: 0 12px 30px rgba(46, 204, 113, 0.4);
         }
 
         .button.promo {
             background: linear-gradient(135deg, 
-                rgba(255, 193, 7, 0.8), 
-                rgba(255, 152, 0, 0.9));
-            box-shadow: 0 10px 25px rgba(255, 193, 7, 0.3);
+                rgba(255, 193, 7, 0.85), 
+                rgba(255, 152, 0, 0.95));
+            box-shadow: 0 12px 30px rgba(255, 193, 7, 0.4);
         }
 
         .button.about {
             background: linear-gradient(135deg, 
-                rgba(52, 152, 219, 0.8), 
-                rgba(41, 128, 185, 0.9));
-            box-shadow: 0 10px 25px rgba(52, 152, 219, 0.3);
+                rgba(52, 152, 219, 0.85), 
+                rgba(41, 128, 185, 0.95));
+            box-shadow: 0 12px 30px rgba(52, 152, 219, 0.4);
         }
 
         .button.whatsapp {
             background: linear-gradient(135deg, 
-                rgba(37, 211, 102, 0.8), 
-                rgba(18, 140, 126, 0.9));
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+                rgba(37, 211, 102, 0.85), 
+                rgba(18, 140, 126, 0.95));
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.4);
         }
 
         /* Luxury Footer */
         .footer {
-            margin-top: 40px;
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.7);
+            margin-top: 45px;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.75);
             text-align: center;
-            animation: fadeIn 2.5s ease;
-            letter-spacing: 1px;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 3s ease;
+            letter-spacing: 1.5px;
+            text-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
             position: relative;
         }
 
         .footer::before {
             content: '';
             position: absolute;
-            top: -20px;
+            top: -25px;
             left: 50%;
             transform: translateX(-50%);
-            width: 60%;
+            width: 70%;
             height: 1px;
             background: linear-gradient(90deg, 
                 transparent, 
-                rgba(255, 255, 255, 0.3), 
+                rgba(255, 255, 255, 0.4), 
                 transparent);
         }
 
         /* Animations */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes fadeInDown {
             from {
                 opacity: 0;
-                transform: translateY(-40px);
+                transform: translateY(-50px);
             }
             to {
                 opacity: 1;
@@ -527,41 +502,42 @@
         /* Responsive Design */
         @media (max-width: 600px) {
             .content {
-                padding: 35px 25px;
-                border-radius: 20px;
+                padding: 40px 30px;
+                border-radius: 24px;
             }
 
             .logo-img {
-                max-width: 240px;
+                max-width: 260px;
             }
 
             .logo-text {
-                font-size: 2.2rem;
+                font-size: 2.4rem;
             }
 
             .button {
-                padding: 18px 25px;
-                font-size: 1.1rem;
+                padding: 20px 30px;
+                font-size: 1.2rem;
             }
         }
 
         @media (max-width: 400px) {
             .logo-text {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
             
             .button i {
-                margin-right: 10px;
-                font-size: 1.2rem;
+                margin-right: 12px;
+                font-size: 1.3rem;
             }
         }
     </style>
 </head>
 <body>
+    <div class="cosmic-bg"></div>
     <div class="particles" id="particles"></div>
-    <div class="constellation" id="constellation"></div>
-    <div class="glow" style="top:15%; left:15%;"></div>
-    <div class="glow gold" style="bottom:20%; right:15%;"></div>
+    <div class="nebula" style="top:10%; left:10%;"></div>
+    <div class="nebula gold" style="bottom:15%; right:10%;"></div>
+    <div class="nebula purple" style="top:60%; left:70%;"></div>
     
     <div class="content">
         <div class="logo-container">
@@ -593,66 +569,77 @@
         // Ultra Premium Particle System
         document.addEventListener('DOMContentLoaded', function() {
             const particlesContainer = document.getElementById('particles');
-            const constellationContainer = document.getElementById('constellation');
-            const particleCount = Math.floor(window.innerWidth / 1.5);
-            
-            // Create constellation
-            createConstellation();
+            const particleCount = Math.floor(window.innerWidth);
             
             // Create luxury particles
             for (let i = 0; i < particleCount; i++) {
                 createParticle();
             }
             
-            // Create occasional shooting stars
-            setInterval(createShootingStar, 2000);
+            // Create frequent shooting stars
+            setInterval(createShootingStar, 1500);
             
             function createParticle() {
                 const particle = document.createElement('div');
-                const particleTypes = ['diamond', 'gold', 'platinum', 'star'];
+                const particleTypes = ['diamond', 'gold', 'star'];
                 const type = particleTypes[Math.floor(Math.random() * particleTypes.length)];
                 
                 particle.classList.add('particle', type);
                 
                 // Random size variation
-                let sizeModifier = Math.random() * 0.5 + 0.75;
+                let sizeModifier = Math.random() * 0.6 + 0.7;
+                
+                // Adjust properties based on type
+                if (type === 'diamond') {
+                    particle.style.width = `${12 * sizeModifier}px`;
+                    particle.style.height = `${12 * sizeModifier}px`;
+                } else if (type === 'gold') {
+                    particle.style.width = `${8 * sizeModifier}px`;
+                    particle.style.height = `${8 * sizeModifier}px`;
+                }
                 
                 // Random position (start below viewport)
                 particle.style.left = `${Math.random() * 100}%`;
                 particle.style.top = `${Math.random() * 100 + 100}%`;
                 
                 // Random animation duration
-                const duration = Math.random() * 15 + 15;
+                const duration = Math.random() * 20 + 15;
                 particle.style.animationDuration = `${duration}s`;
                 
                 // Random delay
-                particle.style.animationDelay = `${Math.random() * 20}s`;
+                particle.style.animationDelay = `${Math.random() * 25}s`;
                 
-                // Random scale
-                particle.style.transform = `scale(${Math.random() * 0.5 + 0.8})`;
+                // Random scale and opacity
+                particle.style.transform = `scale(${Math.random() * 0.6 + 0.7})`;
+                particle.style.opacity = Math.random() * 0.3 + 0.7;
                 
                 particlesContainer.appendChild(particle);
             }
             
             function createShootingStar() {
-                if (Math.random() > 0.5) return; // 50% chance
+                if (Math.random() > 0.6) return; // 40% chance
                 
                 const star = document.createElement('div');
                 star.classList.add('shooting-star');
                 
-                // Random start position (top or right edge)
-                if (Math.random() > 0.5) {
+                // Random start position (top, right, or left edge)
+                const startPos = Math.random();
+                if (startPos > 0.66) {
                     // Start from top
                     star.style.left = `${Math.random() * 100}%`;
                     star.style.top = '0';
-                } else {
+                } else if (startPos > 0.33) {
                     // Start from right
                     star.style.left = '100%';
+                    star.style.top = `${Math.random() * 100}%`;
+                } else {
+                    // Start from left
+                    star.style.left = '0';
                     star.style.top = `${Math.random() * 100}%`;
                 }
                 
                 // Random size
-                const size = Math.random() * 3 + 2;
+                const size = Math.random() * 4 + 2;
                 star.style.width = `${size}px`;
                 star.style.height = `${size}px`;
                 
@@ -660,17 +647,18 @@
                 const duration = Math.random() * 1.5 + 1;
                 star.style.animationDuration = `${duration}s`;
                 
-                // Random color
+                // Random color with matching glow
                 const colors = [
-                    '#ffffff', // white
-                    '#a7e8ff', // light blue
-                    '#ffd7a7', // light gold
-                    '#d7a7ff', // light purple
-                    '#ffa7a7'  // light pink
+                    { main: '#ffffff', glow: 'rgba(100, 200, 255, 0.8)' }, // white with blue glow
+                    { main: '#a7e8ff', glow: 'rgba(167, 232, 255, 0.8)' }, // light blue
+                    { main: '#ffd7a7', glow: 'rgba(255, 215, 167, 0.8)' }, // light gold
+                    { main: '#d7a7ff', glow: 'rgba(215, 167, 255, 0.8)' }  // light purple
                 ];
-                star.style.background = colors[Math.floor(Math.random() * colors.length)];
-                star.style.boxShadow = `0 0 15px 3px ${colors[Math.floor(Math.random() * colors.length)]},
-                                       0 0 30px 6px rgba(100, 200, 255, 0.7)`;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                star.style.background = color.main;
+                star.style.boxShadow = `0 0 20px 5px ${color.main},
+                                       0 0 35px 10px ${color.glow}`;
                 
                 particlesContainer.appendChild(star);
                 
@@ -678,56 +666,6 @@
                 setTimeout(() => {
                     star.remove();
                 }, duration * 1000);
-            }
-            
-            function createConstellation() {
-                // Create 10-15 stars
-                const starCount = Math.floor(Math.random() * 6) + 10;
-                const stars = [];
-                
-                for (let i = 0; i < starCount; i++) {
-                    const star = document.createElement('div');
-                    star.classList.add('particle', 'platinum');
-                    star.style.width = `${Math.random() * 2 + 1}px`;
-                    star.style.height = star.style.width;
-                    star.style.left = `${Math.random() * 100}%`;
-                    star.style.top = `${Math.random() * 100}%`;
-                    star.style.animation = 'none';
-                    star.style.opacity = '0.5';
-                    constellationContainer.appendChild(star);
-                    stars.push(star);
-                }
-                
-                // Connect some stars with lines
-                const lineCount = Math.floor(starCount * 1.5);
-                for (let i = 0; i < lineCount; i++) {
-                    const line = document.createElement('div');
-                    line.classList.add('constellation-line');
-                    
-                    const star1 = stars[Math.floor(Math.random() * stars.length)];
-                    const star2 = stars[Math.floor(Math.random() * stars.length)];
-                    
-                    if (star1 && star2) {
-                        const rect1 = star1.getBoundingClientRect();
-                        const rect2 = star2.getBoundingClientRect();
-                        
-                        const x1 = rect1.left + rect1.width/2;
-                        const y1 = rect1.top + rect1.height/2;
-                        const x2 = rect2.left + rect2.width/2;
-                        const y2 = rect2.top + rect2.height/2;
-                        
-                        const length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-                        const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
-                        
-                        line.style.width = `${length}px`;
-                        line.style.left = `${x1}px`;
-                        line.style.top = `${y1}px`;
-                        line.style.transform = `rotate(${angle}deg)`;
-                        line.style.opacity = Math.random() * 0.2 + 0.1;
-                        
-                        constellationContainer.appendChild(line);
-                    }
-                }
             }
         });
     </script>
